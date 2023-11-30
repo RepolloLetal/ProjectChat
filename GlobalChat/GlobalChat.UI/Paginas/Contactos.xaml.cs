@@ -48,7 +48,7 @@ public partial class Contactos : ContentPage
         elementosMenu.Clear();
         foreach (var contacto in contactosCompletos)
         {
-            ContactoComp comp = new ContactoComp(contacto);
+            ContactoComp comp = new ContactoComp(contacto, true);
             elementosMenu.Add(comp);
         }
     }

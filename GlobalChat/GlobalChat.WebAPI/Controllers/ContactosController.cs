@@ -66,6 +66,50 @@ namespace GlobalChat.WebApi.Controllers
             return peticionDto;
         }
 
+        [HttpPost("EditarContacto")]
+        public async Task<PeticionDto<ContactoCompletoDto>> EditarContacto([FromBody] PeticionDto<ContactoDto> contactoEdicion)
+        {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(contactoEdicion.TokenPeticion))
+                return new PeticionDto<ContactoCompletoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+            PeticionDto<ContactoCompletoDto> peticionDto = new PeticionDto<ContactoCompletoDto>();
+            ContactoCompletoDto nuevoCon = new ContactoCompletoDto();
+            Contacto contactoAc = null;
+            try
+            {
+                contactoAc = context.Contactos.Where(x => x.IdUsuarioA == contactoEdicion.Value.IdUsuarioA && x.IdUsuarioB == contactoEdicion.Value.IdUsuarioB).First();
+            }
+            catch { }
+            if(contactoAc != null)
+            {
+                peticionDto.PeticionCorrecta = true;
+
+                contactoAc.Favorito = contactoEdicion.Value.Favorito;
+                context.Contactos.Update(contactoAc);
+                await context.SaveChangesAsync();
+
+                nuevoCon.IdOtroUsuario = contactoAc.IdUsuarioB;
+                nuevoCon.NombreUsuario = context.Usuarios.Where(x => x.Id == nuevoCon.IdOtroUsuario).First().Nombre;
+                try
+                {
+                    nuevoCon.UltSesion = context.Sesiones.Where(x => x.IdUsuario == nuevoCon.IdOtroUsuario).Last().DiaHoraSesion;
+                }
+                catch
+                {
+                    nuevoCon.UltSesion = "Nunca conectado";
+                }
+                nuevoCon.Favorito = contactoAc.Favorito;
+                peticionDto.Value = nuevoCon;
+            }
+            else
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "No se ha encontrado el contacto";
+            }
+
+            return peticionDto;
+        }
+
         [HttpPost("EliminarContacto")]
         public async Task<PeticionDto<ContactoDto>> EliminarContacto(PeticionDto<ContactoDto> contactoEli)
         {
@@ -74,7 +118,13 @@ namespace GlobalChat.WebApi.Controllers
                 return new PeticionDto<ContactoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             PeticionDto<ContactoDto> peticionDto = new PeticionDto<ContactoDto>();
-            Contacto contactoEliminar = context.Contactos.Where(x => x.IdUsuarioA == contactoEli.Value.IdUsuarioA && x.IdUsuarioB == contactoEli.Value.IdUsuarioB).First();
+            Contacto contactoEliminar = null;
+            try
+            {
+                contactoEliminar = context.Contactos.Where(x => x.IdUsuarioA == contactoEli.Value.IdUsuarioA && x.IdUsuarioB == contactoEli.Value.IdUsuarioB).First();
+            }
+            catch { }
+            
 
             if (contactoEliminar !=null)
             {
