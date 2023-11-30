@@ -5,11 +5,20 @@ namespace GlobalChat.UI.Componentes;
 
 public partial class ContactoComp : ContentView
 {
-    public ContactoCompletoDto ContactoCompleto { get; set; } = new ContactoCompletoDto();
+    public ContactoCompletoDto ContactoCompleto { get; set; }
 
-    public ContactoComp()
+    public ContactoComp(ContactoCompletoDto contactoCompleto)
 	{
 		InitializeComponent();
+        ContactoCompleto = contactoCompleto;
+        if (contactoCompleto.Favorito)
+        {
+            img.Source = "favoritolleno.png";
+        }
+        else
+        {
+            img.Source = "favoritovacio.png";
+        }
         DatosGridComp.BindingContext = ContactoCompleto;
     }
 }

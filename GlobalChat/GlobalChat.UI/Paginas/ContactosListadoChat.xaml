@@ -11,7 +11,6 @@
         </Grid.RowDefinitions>
         <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="DarkGray" CancelButtonColor="DarkGray" BackgroundColor="#E8DFEB" WidthRequest="310" HeightRequest="40" Margin="5" TextColor="#0D0D0D"/>
         <VerticalStackLayout Grid.Row="1">
-            <componentes:ContactoComp/>
         </VerticalStackLayout>
     </Grid>
     
