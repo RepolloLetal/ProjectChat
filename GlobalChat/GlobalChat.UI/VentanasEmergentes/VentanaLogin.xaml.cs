@@ -41,7 +41,6 @@ public partial class VentanaLogin : ContentPage
 
     private async Task LoginUsuarioAsync()
     {
-        await Navigation.PopModalAsync();
         HttpResponseMessage respuesta = await ServicioAPI.Cliente.PostAsJsonAsync("api/Usuario/LoginUsuario", UsuarioLogin, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         if (respuesta.IsSuccessStatusCode)
         {

@@ -11,7 +11,7 @@ namespace GlobalChat.UI
 {
     public static class ServicioPersistencia
     {
-        private static readonly string ARCHIVO = "Configuracion.gc";
+        private static readonly string ARCHIVO = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Configuracion.gc");
         private static DatosGuardado datosGuardado;
         public static bool SesionIniciada
         {

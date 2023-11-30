@@ -1,5 +1,9 @@
-﻿using GlobalChat.UI.Menus;
+﻿using GlobalChat.Business.Dtos;
+using GlobalChat.UI.Menus;
+using GlobalChat.UI.Modelos;
 using GlobalChat.UI.VentanasEmergentes;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace GlobalChat.UI
 {
@@ -9,7 +13,6 @@ namespace GlobalChat.UI
         {
             InitializeComponent();
             flyoutMenu.elementosMenu.SelectionChanged += OnSelectionChanged;
-            
         }
 
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -17,28 +20,13 @@ namespace GlobalChat.UI
             var item = e.CurrentSelection.FirstOrDefault() as ElementoMenu;
             if (item != null)
             {
-                Detail = new NavigationPage((Page)Activator.CreateInstance(item.PaginaObjetivo));
-                if (!((IFlyoutPageController)this).ShouldShowSplitMode)
-                    IsPresented = false;
+                Detail = (Page)Activator.CreateInstance(item.PaginaObjetivo);
             }
         }
 
-        private void ComprobarSesion()
+        private async void FlyoutPage_Loaded(object sender, EventArgs e)
         {
-            if (ServicioPersistencia.SesionIniciada)
-            {
-
-            }
-            else
-            {
-                Navigation.PushModalAsync(new VentanaLogin());
-            }
-        }
-
-        private void FlyoutPage_Loaded(object sender, EventArgs e)
-        {
-           ComprobarSesion();
+            await ServicioAPI.ReLogin(Navigation);
         }
     }
-
 }

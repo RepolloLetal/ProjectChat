@@ -4,7 +4,7 @@
             x:Class="GlobalChat.UI.MainPage"
             xmlns:local="clr-namespace:GlobalChat.UI"
             xmlns:menus="clr-namespace:GlobalChat.UI.Menus"
-            Loaded="FlyoutPage_Loaded">
+            Loaded="FlyoutPage_Loaded" Shell.NavBarIsVisible="False">
     <FlyoutPage.Flyout>
         <menus:MenuPrincipal x:Name="flyoutMenu"/>
     </FlyoutPage.Flyout>

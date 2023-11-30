@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:GlobalChat.UI.Menus"
              xmlns:paginas="clr-namespace:GlobalChat.UI.Paginas"
              xmlns:ventanasemergentes="clr-namespace:GlobalChat.UI.VentanasEmergentes"
+             xmlns:root="clr-namespace:GlobalChat.UI"
              Title="MenuPrincipal" BackgroundColor="#21052A">
     <Grid>
         <Grid.RowDefinitions>
@@ -57,6 +58,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <ImageButton Source="usuario.png" Grid.Row="4" HeightRequest="60" WidthRequest="60" HorizontalOptions="Start" Margin="30" Background="Transparent"/>
-        <Label Grid.Row="4" Text="Usuario" TextColor="DarkGrey" FontSize="20" HorizontalOptions="Center" Margin="30" FontAttributes="Bold"/>
+        <Label x:Name="LabelNombre" Grid.Row="4" Text="Sin usuario" TextColor="DarkGrey" FontSize="20" HorizontalOptions="Center" Margin="30" FontAttributes="Bold"/>
     </Grid>
 </ContentPage>

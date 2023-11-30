@@ -5,8 +5,11 @@
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new MainPage());
+            NavigationPage main = new NavigationPage(new MainPage());
+            NavigationPage.SetTitleView(main, null);
+            NavigationPage.SetHasNavigationBar(main, false);
+            NavigationPage.SetHasBackButton(main, false);
+            MainPage = main;
         }
     }
 }

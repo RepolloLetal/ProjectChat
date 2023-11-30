@@ -68,7 +68,7 @@ namespace GlobalChat.WebApi.Controllers
             return peticionDto;
         }
 
-        [HttpPut("LoginUsuario")]
+        [HttpPost("LoginUsuario")]
         public PeticionDto<UsuarioDto> LoginUsuario([FromBody] UsuarioDto usuarioLogin)
         {
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
@@ -83,6 +83,35 @@ namespace GlobalChat.WebApi.Controllers
                 peticionDto.TokenPeticion = auth.UsuarioInicioSesion(usuarioLogin.Id);
             }
             peticionDto.Value = usuarioLogin;
+            return peticionDto;
+        }
+
+        [HttpPost("EditarUsuario")]
+        public async Task<PeticionDto<UsuarioDto>> EditarUsuario([FromBody] PeticionDto<UsuarioDto> usuarioEdicion)
+        {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(usuarioEdicion.TokenPeticion))
+                return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
+            Usuario usuario = mapper.Map<Usuario>(usuarioEdicion.Value);
+            usuario.Configuracion = null;
+            usuario.UsuarioChat = null;
+            PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
+
+            if (context.Usuarios.Where(x => x.NombreLogin == usuario.NombreLogin && x.Id != usuario.Id).Any())
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Nombre de usuario en uso";
+            }
+            else
+            {
+                context.Usuarios.Update(usuario);
+                await context.SaveChangesAsync();
+                UsuarioDto usuarioEdicionDto = mapper.Map<UsuarioDto>(usuario);
+                peticionDto.Value = usuarioEdicionDto;
+                peticionDto.PeticionCorrecta = true;
+            }
+
             return peticionDto;
         }
 
