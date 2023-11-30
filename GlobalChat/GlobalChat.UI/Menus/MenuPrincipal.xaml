@@ -4,6 +4,7 @@
              x:Class="GlobalChat.UI.Menus.MenuPrincipal"
              xmlns:local="clr-namespace:GlobalChat.UI.Menus"
              xmlns:paginas="clr-namespace:GlobalChat.UI.Paginas"
+             xmlns:ventanasemergentes="clr-namespace:GlobalChat.UI.VentanasEmergentes"
              Title="MenuPrincipal">
     <Grid>
         <Grid.RowDefinitions>
@@ -23,9 +24,10 @@
                     <local:ElementoMenu Titulo="Chats"
                               Icono="chats.png"
                                     PaginaObjetivo="{x:Type paginas:Chats}"/>
-                    <local:ElementoMenu Titulo="Favoritos"
-                              Icono="favoritos.png"
-                                    PaginaObjetivo="{x:Type paginas:Favoritos}"/>
+                    <!--<local:ElementoMenu Titulo="Favoritos"-->
+                    <!--Icono="favoritos.png"-->
+                    <local:ElementoMenu Titulo="Login"
+                                    PaginaObjetivo="{x:Type VentanasEmergentes:VentanaLogin}"/>
                     <local:ElementoMenu Titulo="Archivado"
                               Icono="archivados.png"
                                     PaginaObjetivo="{x:Type paginas:Archivado}"/>

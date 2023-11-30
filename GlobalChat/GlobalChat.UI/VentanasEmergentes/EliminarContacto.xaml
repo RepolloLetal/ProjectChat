@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlobalChat.UI.VentanasEmergentes.EliminarContacto"
+             Title="EliminarContacto">
+    <Grid>
+        <Border BackgroundColor="#94869F" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="50"/>
+            </Border.StrokeShape>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="El contacto seleccionado se borrará. ¿Estás seguro?" FontAttributes="Bold" FontFamily="Arial"/>
+                <Button Grid.Row="1" Grid.Column="0" Text="Sí" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="No" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745"/>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

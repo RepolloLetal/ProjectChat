@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlobalChat.UI.VentanasEmergentes.VentanaRegistro"
+             Title="VentanaRegistro">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BackgroundColor="#382745" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="50"/>
+            </Border.StrokeShape>
+            <Grid>
+                <Label Grid.Row="0" Text="Crear cuenta" TextColor="#0D0D0D" FontAttributes="Bold" FontFamily="Arial"/>
+                <Entry Grid.Row="1" Text="Nombre de usuario" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#0D0D0D"/>
+                <Entry Grid.Row="2" Text="E-mail" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#0D0D0D"/>
+                <Entry Grid.Row="3" Text="Contraseña" BackgroundColor="#DCD6DF" IsPassword="True" FontFamily="Arial" TextColor="#0D0D0D"/>
+                <Button Grid.Row="4" Text="Crear cuenta" BackgroundColor="#655274" TextColor="#FEFFFF" CornerRadius="30" FontFamily="Arial"/>
+                <Button Grid.Row="5" Text="¿Ya tienes una cuenta creada? ¡Inicia sesión!" TextColor="#FEFFFF" FontAttributes="Bold" FontFamily="Arial"/>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
