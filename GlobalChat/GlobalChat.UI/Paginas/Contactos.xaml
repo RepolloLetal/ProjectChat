@@ -12,8 +12,8 @@
         <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="White" CancelButtonColor="Beige" BackgroundColor="#E8DFEB" HorizontalOptions="Start" WidthRequest="650" HeightRequest="40" Margin="20" TextColor="#0D0D0D"/>
         <Ellipse Grid.Row="0" HorizontalOptions="End" WidthRequest="55" HeightRequest="55" Margin="10" Fill="White"/>
         <ImageButton Source="adduser.png" Grid.Row="0" HorizontalOptions="End" WidthRequest="60" HeightRequest="60" Margin="5"/>
-        <CollectionView x:Name="elementosMenu"
-    x:FieldModifier="public"
+        <!--<CollectionView x:Name="elementosMenu"-->
+    <!--x:FieldModifier="public"
     SelectionMode="Single" Grid.Row="2">
             <CollectionView.ItemsSource>
                 <x:Array Type="{x:Type menus:ElementoMenu}">
@@ -47,6 +47,6 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
     </Grid>
 </ContentPage>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlobalChat.UI.Paginas.ChatContacto"
+             Title="ChatContacto" BackgroundColor="#382745">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="550"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="#9E87B0" HeightRequest="90" WidthRequest="1500"/>
+        <Label Grid.Row="0" Grid.Column="1" Text="Nombre Contacto" TextColor="White" FontAttributes="Bold" Margin="20" FontSize="25" Padding="10"/>
+        <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10" BackgroundColor="#9E87B0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="35"/>
+            </Border.StrokeShape>
+            <Grid>
+
+            </Grid>
+        </Border>
+        <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black"/>
+    </Grid>
+    
+</ContentPage>

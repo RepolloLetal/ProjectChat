@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlobalChat.UI.Paginas.ContactosListadoChat"
+             Title="ContactosListadoChat" BackgroundColor="#382745">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="DarkGray" CancelButtonColor="Beige" BackgroundColor="#E8DFEB" WidthRequest="310" HeightRequest="40" Margin="5" TextColor="#0D0D0D"/>
+    </Grid>
+    
+    
+</ContentPage>

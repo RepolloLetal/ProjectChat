@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GlobalChat.UI.Paginas.Favoritos"
-             Title="Favoritos">
+             Title="Favoritos" BackgroundColor="#9E87B0">
+
     <Grid>
-        <Label 
-        Text="FAVORITOS"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="White" CancelButtonColor="Beige" BackgroundColor="#E8DFEB" HorizontalOptions="Start" WidthRequest="650" HeightRequest="40" Margin="20" TextColor="#0D0D0D"/>
     </Grid>
 </ContentPage>
