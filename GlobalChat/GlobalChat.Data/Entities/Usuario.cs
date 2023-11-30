@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,5 @@ namespace GlobalChat.Data.Entities
         public string Password { get; set; }
         public virtual Configuracion Configuracion { get; set; }
         public virtual ICollection<UsuarioChat> UsuarioChat { get; set; }
-        public virtual ICollection<Contactos> Contactos { get; set; }
     }
 }

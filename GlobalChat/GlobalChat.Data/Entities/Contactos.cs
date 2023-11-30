@@ -10,12 +10,8 @@ namespace GlobalChat.Data.Entities
     public record Contactos
     {
         public int Id { get; set; }
-        [ForeignKey("Usuario")]
         public int IdUsuarioA { get; set; }
-        public virtual Usuario UsuarioA { get; set; }
-        [ForeignKey("Usuario")]
         public int IdUsuarioB { get; set; }
-        public virtual Usuario UsuarioB { get; set; }
 
     }
 }
