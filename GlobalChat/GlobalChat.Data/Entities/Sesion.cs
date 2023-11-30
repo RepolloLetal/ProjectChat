@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace GlobalChat.Data.Entities
 {
-    public record Chat
+    public record Sesion
     {
         public int Id { get; set; }
-        public string NombreChat { get; set; }
-        public virtual ICollection<Mensaje> Mensajes { get; set; }
+        public string DiaHoraSesion { get; set; }
+        public int IdUsuario { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

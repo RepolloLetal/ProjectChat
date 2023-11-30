@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GlobalChat.Data\GlobalChat.Data.csproj" />
+    <ProjectReference Include="..\GlobalChat.Model\GlobalChat.Business.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GlobalChat.Data.Entities
+namespace GlobalChat.Business.Dtos
 {
-    public record Chat
+    public class ChatDto
     {
         public int Id { get; set; }
         public string NombreChat { get; set; }
-        public virtual ICollection<Mensaje> Mensajes { get; set; }
+        public List<MensajeDto> Mensajes { get; set; }
     }
 }

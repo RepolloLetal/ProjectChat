@@ -35,7 +35,7 @@ namespace GlobalChat.Data
         public DbSet<Configuracion> Configuraciones { get; set; }
         public DbSet<Contacto> Contactos { get; set; }
         public DbSet<Mensaje> Mensajes { get; set; }
-        public DbSet<Sesiones> Sesiones { get; set; }
+        public DbSet<Sesion> Sesiones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioChat> Usuarioschats { get; set; }
 
