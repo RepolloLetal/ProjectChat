@@ -12,6 +12,8 @@ namespace GlobalChat.Business.Dtos
         public bool PeticionCorrecta { get; set; }
         public string MensajeError { get; set; } = string.Empty;
         public T? Value { get; set; }
+        public string TokenPeticion { get; set; } = string.Empty;
+        public bool ErrorPorToken { get; set; }
     }
 
 }

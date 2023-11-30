@@ -2,6 +2,7 @@
 using GlobalChat.Business.Dtos;
 using GlobalChat.Data;
 using GlobalChat.Data.Entities;
+using GlobalChat.WebApi.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,23 +14,29 @@ namespace GlobalChat.WebApi.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
-        public ContactosController(DataContext context, IMapper mapper)
+        private readonly ServicioAuth auth;
+        public ContactosController(DataContext context, IMapper mapper, ServicioAuth auth)
         {
             this.context = context;
             this.mapper = mapper;
+            this.auth = auth;
         }
 
         [HttpPost("AgregarContacto")]
-        public async Task<PeticionDto<ContactoDto>> AgregarContacto([FromBody] NuevoContactoDto nuevoContacto)
+        public async Task<PeticionDto<ContactoDto>> AgregarContacto([FromBody] PeticionDto<NuevoContactoDto> nuevoContacto)
         {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(nuevoContacto.TokenPeticion))
+                return new PeticionDto<ContactoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
             PeticionDto<ContactoDto> peticionDto = new PeticionDto<ContactoDto>();
-            Usuario usuario = context.Usuarios.Where(x => x.NombreLogin == nuevoContacto.NombreContacto).First();
+            Usuario usuario = context.Usuarios.Where(x => x.NombreLogin == nuevoContacto.Value.NombreContacto).First();
 
             if (usuario != null)
             {
                 peticionDto.PeticionCorrecta = true;
                 Contacto contacto = new Contacto();
-                contacto.IdUsuarioA = nuevoContacto.IdUsuarioActual;
+                contacto.IdUsuarioA = nuevoContacto.Value.IdUsuarioActual;
                 contacto.IdUsuarioB = usuario.Id;
                 await context.Contactos.AddAsync(contacto);
                 await context.SaveChangesAsync();
@@ -44,11 +51,15 @@ namespace GlobalChat.WebApi.Controllers
 
         }
 
-        [HttpDelete("EliminarContacto/{id}")]
-        public async Task<PeticionDto<ContactoDto>> EliminarContacto(int id)
+        [HttpPost("EliminarContacto")]
+        public async Task<PeticionDto<ContactoDto>> EliminarContacto(PeticionDto<int> idContacto)
         {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(idContacto.TokenPeticion))
+                return new PeticionDto<ContactoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
             PeticionDto<ContactoDto> peticionDto = new PeticionDto<ContactoDto>();
-            Contacto contactoEliminar = context.Contactos.Where(x => x.Id == id).First();
+            Contacto contactoEliminar = context.Contactos.Where(x => x.Id == idContacto.Value).First();
 
             if (contactoEliminar !=null)
             {
@@ -66,11 +77,15 @@ namespace GlobalChat.WebApi.Controllers
 
         }
 
-        [HttpGet("ObtenerListaContactos/{idUsuario}")]
-        public async Task<PeticionDto<List<ContactoDto>>> ObtenerListaContactos(int idUsuario)
+        [HttpPost("ObtenerListaContactos")]
+        public async Task<PeticionDto<List<ContactoDto>>> ObtenerListaContactos(PeticionDto<int> idUsuario)
         {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
+                return new PeticionDto<List<ContactoDto>>() { PeticionCorrecta = false, ErrorPorToken = true };
+
             PeticionDto<List<ContactoDto>> peticionDto = new PeticionDto<List<ContactoDto>>();
-            List<Contacto> listaContactos = await context.Contactos.Where(x => x.IdUsuarioA == idUsuario || x.IdUsuarioB == idUsuario).ToListAsync();
+            List<Contacto> listaContactos = await context.Contactos.Where(x => x.IdUsuarioA == idUsuario.Value || x.IdUsuarioB == idUsuario.Value).ToListAsync();
 
             if(listaContactos != null && listaContactos.Count > 0)
             {

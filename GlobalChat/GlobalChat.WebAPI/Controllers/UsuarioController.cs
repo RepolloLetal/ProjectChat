@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GlobalChat.Business.Dtos;
 using GlobalChat.Data.Entities;
 using AutoMapper;
+using GlobalChat.WebApi.Servicios;
 
 namespace GlobalChat.WebApi.Controllers
 {
@@ -12,16 +13,22 @@ namespace GlobalChat.WebApi.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
-        public UsuarioController(DataContext context, IMapper mapper) 
+        private readonly ServicioAuth auth;
+        public UsuarioController(DataContext context, IMapper mapper, ServicioAuth auth) 
         {
             this.context = context;
             this.mapper = mapper;
+            this.auth = auth;
         }
 
-        [HttpGet("ObtenerUsuario/{id}")]
-        public PeticionDto<UsuarioDto> ObtenerUsuario(int id) 
+        [HttpPost("ObtenerUsuario")]
+        public PeticionDto<UsuarioDto> ObtenerUsuario(PeticionDto<int> idUsuario)
         {
-            Usuario usuario = context.Usuarios.Where(x  => x.Id == id).First();
+            //Comprobacion usuario valido
+            if(!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion)) 
+                return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true};
+
+            Usuario usuario = context.Usuarios.Where(x  => x.Id == idUsuario.Value).First();
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
 
             if (usuario != null) 
@@ -70,15 +77,24 @@ namespace GlobalChat.WebApi.Controllers
             {
                 peticionDto.MensajeError = "Usuario y/o contraseña incorrectos";
             }
+            else
+            {
+                usuarioLogin = mapper.Map<UsuarioDto>(context.Usuarios.Where(x => x.NombreLogin == usuarioLogin.NombreLogin && x.Password == usuarioLogin.Password).First());
+                peticionDto.TokenPeticion = auth.UsuarioInicioSesion(usuarioLogin.Id);
+            }
             peticionDto.Value = usuarioLogin;
             return peticionDto;
         }
 
-        [HttpGet("ObtenerConfiguracion/{idUsuario}")]
-        public PeticionDto<ConfiguracionDto> ObtenerConfiguracion(int idUsuario)
+        [HttpPost("ObtenerConfiguracion")]
+        public PeticionDto<ConfiguracionDto> ObtenerConfiguracion(PeticionDto<int> idUsuario)
         {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
+                return new PeticionDto<ConfiguracionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
             PeticionDto<ConfiguracionDto> peticionDto = new PeticionDto<ConfiguracionDto>();
-            Configuracion config = context.Configuraciones.Where(x => x.IdUsuario == idUsuario).First();
+            Configuracion config = context.Configuraciones.Where(x => x.IdUsuario == idUsuario.Value).First();
 
             if (config != null)
             {
