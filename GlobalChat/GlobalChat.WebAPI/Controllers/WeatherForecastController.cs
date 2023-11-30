@@ -1,3 +1,4 @@
+using GlobalChat.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalChat.WebApi.Controllers
