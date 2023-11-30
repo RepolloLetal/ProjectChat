@@ -53,6 +53,9 @@ public partial class Ajustes : ContentPage
             PeticionDto<UsuarioDto> petUsu = JsonSerializer.Deserialize<PeticionDto<UsuarioDto>>(respuestaStr, new JsonSerializerOptions(JsonSerializerDefaults.Web)) ?? new PeticionDto<UsuarioDto>();
             if (petUsu.PeticionCorrecta)
             {
+                petUsu.TokenPeticion = ServicioAPI.TokenUsuario;
+                ServicioAPI.UsuarioLoggeado(petUsu);
+                CargarDatos();
                 await DisplayAlert("Info", "Datos actualizados correctamente.", "OK");
             }
             else if(petUsu.ErrorPorToken)

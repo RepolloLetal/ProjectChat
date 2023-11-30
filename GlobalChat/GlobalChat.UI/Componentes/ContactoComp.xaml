@@ -14,12 +14,8 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Frame   Grid.Row="0" Grid.RowSpan="2">
-            <Ellipse Grid.Row="0" Grid.RowSpan="2" HeightRequest="30" WidthRequest="30" Fill="White" HorizontalOptions="Start"/>
-        </Frame>
-        <Frame>
-            <Image Source="{Binding IconUsuario}" Grid.Row="0" Grid.RowSpan="2" HeightRequest="20" WidthRequest="20" HorizontalOptions="Start"/>
-        </Frame>
+        <Ellipse Grid.Row="0" Grid.RowSpan="2" HeightRequest="30" WidthRequest="30" Fill="White" HorizontalOptions="Start"/>
+        <Image Source="usuario.png" Grid.Row="0" Grid.RowSpan="2" HeightRequest="20" WidthRequest="20" HorizontalOptions="Start"/>
         <Label Text="fcdfdsfdsfs" FontFamily="Arial" FontAttributes="Bold" FontSize="20" TextColor="DarkGray" Grid.Row="0" Grid.Column="1" TranslationY="20" Margin="5"/>
         <Label Text=" dfdsfsdfsdf" FontFamily="Arial" FontAttributes="Bold" FontSize="15" TextColor="DarkGray" Grid.Row="1" Grid.Column="1" Margin="5"/>
         <Image Source="{Binding IconFavorito}" Grid.Row="1" Grid.Column="2" Margin="5"/>
