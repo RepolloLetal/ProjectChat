@@ -8,9 +8,9 @@ namespace GlobalChat.Business.Dtos
 {
     public class ContactoCompletoDto
     {
+        public int IdOtroUsuario { get; set; }
         public string NombreUsuario { get; set; } = string.Empty;
         public string UltSesion { get; set; } = string.Empty;
-        public string IconUsuario { get; set; } = string.Empty;
         public bool Favorito { get; set; }
     }
 }

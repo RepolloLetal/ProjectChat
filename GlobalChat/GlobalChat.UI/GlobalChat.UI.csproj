@@ -109,9 +109,6 @@
 	  <MauiXaml Update="Paginas\Favoritos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="VentanasEmergentes\AgregarNuevoContacto.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="VentanasEmergentes\CerrarSesion.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

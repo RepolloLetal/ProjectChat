@@ -12,6 +12,6 @@ namespace GlobalChat.Data.Entities
         public int Id { get; set; }
         public int IdUsuarioA { get; set; }
         public int IdUsuarioB { get; set; }
-
+        public bool Favorito { get; set; }
     }
 }

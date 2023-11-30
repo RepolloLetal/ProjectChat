@@ -5,6 +5,7 @@ using GlobalChat.Data.Entities;
 using GlobalChat.WebApi.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace GlobalChat.WebApi.Controllers
 {
@@ -30,17 +31,32 @@ namespace GlobalChat.WebApi.Controllers
                 return new PeticionDto<ContactoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             PeticionDto<ContactoDto> peticionDto = new PeticionDto<ContactoDto>();
-            Usuario usuario = context.Usuarios.Where(x => x.NombreLogin == nuevoContacto.Value.NombreContacto).First();
+            Usuario usuario = null;
+            try
+            {
+                usuario = context.Usuarios.Where(x => x.Nombre == nuevoContacto.Value.NombreContacto).First();
+            }
+            catch { }
 
             if (usuario != null)
             {
-                peticionDto.PeticionCorrecta = true;
-                Contacto contacto = new Contacto();
-                contacto.IdUsuarioA = nuevoContacto.Value.IdUsuarioActual;
-                contacto.IdUsuarioB = usuario.Id;
-                await context.Contactos.AddAsync(contacto);
-                await context.SaveChangesAsync();
-                peticionDto.Value = mapper.Map<ContactoDto>(contacto);
+                bool agregado = context.Contactos.Where(x => x.IdUsuarioA == nuevoContacto.Value.IdUsuarioActual && x.IdUsuarioB == usuario.Id).Any();
+                if (!agregado)
+                {
+                    peticionDto.PeticionCorrecta = true;
+                    Contacto contacto = new Contacto();
+                    contacto.IdUsuarioA = nuevoContacto.Value.IdUsuarioActual;
+                    contacto.IdUsuarioB = usuario.Id;
+                    contacto.Favorito = false;
+                    await context.Contactos.AddAsync(contacto);
+                    await context.SaveChangesAsync();
+                    peticionDto.Value = mapper.Map<ContactoDto>(contacto);
+                }
+                else
+                {
+                    peticionDto.PeticionCorrecta = false;
+                    peticionDto.MensajeError = "Usuario ya agregado";
+                }
             }
             else
             {
@@ -48,18 +64,17 @@ namespace GlobalChat.WebApi.Controllers
                 peticionDto.MensajeError = "No se ha encontrado el usuario";
             }
             return peticionDto;
-
         }
 
         [HttpPost("EliminarContacto")]
-        public async Task<PeticionDto<ContactoDto>> EliminarContacto(PeticionDto<int> idContacto)
+        public async Task<PeticionDto<ContactoDto>> EliminarContacto(PeticionDto<ContactoDto> contactoEli)
         {
             //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idContacto.TokenPeticion))
+            if (!auth.ComprobarUsuarioValido(contactoEli.TokenPeticion))
                 return new PeticionDto<ContactoDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             PeticionDto<ContactoDto> peticionDto = new PeticionDto<ContactoDto>();
-            Contacto contactoEliminar = context.Contactos.Where(x => x.Id == idContacto.Value).First();
+            Contacto contactoEliminar = context.Contactos.Where(x => x.IdUsuarioA == contactoEli.Value.IdUsuarioA && x.IdUsuarioB == contactoEli.Value.IdUsuarioB).First();
 
             if (contactoEliminar !=null)
             {
@@ -78,19 +93,36 @@ namespace GlobalChat.WebApi.Controllers
         }
 
         [HttpPost("ObtenerListaContactos")]
-        public async Task<PeticionDto<List<ContactoDto>>> ObtenerListaContactos(PeticionDto<int> idUsuario)
+        public async Task<PeticionDto<List<ContactoCompletoDto>>> ObtenerListaContactos(PeticionDto<int> idUsuario)
         {
             //Comprobacion usuario valido
             if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
-                return new PeticionDto<List<ContactoDto>>() { PeticionCorrecta = false, ErrorPorToken = true };
+                return new PeticionDto<List<ContactoCompletoDto>>() { PeticionCorrecta = false, ErrorPorToken = true };
 
-            PeticionDto<List<ContactoDto>> peticionDto = new PeticionDto<List<ContactoDto>>();
-            List<Contacto> listaContactos = await context.Contactos.Where(x => x.IdUsuarioA == idUsuario.Value || x.IdUsuarioB == idUsuario.Value).ToListAsync();
+            PeticionDto<List<ContactoCompletoDto>> peticionDto = new PeticionDto<List<ContactoCompletoDto>>();
+            List<Contacto> listaContactos = await context.Contactos.Where(x => x.IdUsuarioA == idUsuario.Value).ToListAsync();
 
             if(listaContactos != null && listaContactos.Count > 0)
             {
+                List<ContactoCompletoDto> contactosCompletos = new List<ContactoCompletoDto>();
+                foreach (Contacto con in listaContactos)
+                {
+                    ContactoCompletoDto nuevoCon = new ContactoCompletoDto();
+                    nuevoCon.IdOtroUsuario = con.IdUsuarioB;
+                    nuevoCon.NombreUsuario = context.Usuarios.Where(x => x.Id == nuevoCon.IdOtroUsuario).First().Nombre;
+                    try
+                    {
+                        nuevoCon.UltSesion = context.Sesiones.Where(x => x.IdUsuario == nuevoCon.IdOtroUsuario).Last().DiaHoraSesion;
+                    }
+                    catch 
+                    {
+                        nuevoCon.UltSesion = "Nunca conectado";
+                    }
+                    nuevoCon.Favorito = con.Favorito;
+                    contactosCompletos.Add(nuevoCon);
+                }
                 peticionDto.PeticionCorrecta = true;
-                peticionDto.Value = mapper.Map<List<ContactoDto>>(listaContactos);
+                peticionDto.Value = contactosCompletos;
             }
             else
             {
@@ -98,7 +130,6 @@ namespace GlobalChat.WebApi.Controllers
                 peticionDto.MensajeError = "El usuario no tiene contactos";
             }
             return peticionDto;
-
         }
     }
 }
