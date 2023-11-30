@@ -1,4 +1,4 @@
-namespace GlobalChat.WebAPI
+namespace GlobalChat.WebApi
 {
     public class WeatherForecast
     {

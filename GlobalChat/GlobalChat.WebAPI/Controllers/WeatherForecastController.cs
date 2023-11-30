@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace GlobalChat.WebAPI.Controllers
+namespace GlobalChat.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -18,7 +18,7 @@ namespace GlobalChat.WebAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
