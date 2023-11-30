@@ -2,11 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GlobalChat.MAUI.Paginas.Ajustes"
-             Title="Ajustes">
+             Title="Ajustes" BackgroundColor="#21052A">
      <Grid>
-        <Label 
-            Text="AJUSTES"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="380"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BackgroundColor="#E1D9E9" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="50"/>
+            </Border.StrokeShape>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="#94869F"/>
+                <Ellipse Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="130" HeightRequest="130" Fill="#333333" HorizontalOptions="Center"/>
+                <Image Source="usuario.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" WidthRequest="140" HeightRequest="140" HorizontalOptions="Center" Aspect="AspectFill"/>
+                <Label Grid.Column="2" Grid.Row="0"  Text="Usuario123" TextColor="#2F1D3E" FontFamily="Arial" FontSize="25" FontAttributes="Bold" VerticalOptions="End" Margin="10,0,0,0"/>
+                <Button Grid.Column="2" Grid.Row="1" Text="Editar perfil" TextColor="#EEEEEE" FontSize="20" BackgroundColor="#3E2951" WidthRequest="170" HeightRequest="50"/>
+                <Border BackgroundColor="#655274" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="25">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40"/>
+                    </Border.StrokeShape>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" BackgroundColor="#E1D9E9" Text="CORREO ELECTRÓNICO: Usuario123@ejemplo.com" FontAttributes="Bold" TextColor="#3E2951" Margin="20" FontSize="17"/>
+                        <Label Grid.Row="1" BackgroundColor="#E1D9E9" Text="NOMBRE DE USUARIO: Usuario123" FontAttributes="Bold" TextColor="#3E2951" Margin="20" FontSize="17"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Button Grid.Row="2" BackgroundColor="#94869F" Text="Cambiar contraseña" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
+        <Button Grid.Row="3" BackgroundColor="#94869F" Text="Eliminar cuenta" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
+        <Button Grid.Row="4" BackgroundColor="#94869F" Text="Tamaño letra" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
+        <Button Grid.Row="5" BackgroundColor="#94869F" Text="Acerca de" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
+
     </Grid>
 </ContentPage>
