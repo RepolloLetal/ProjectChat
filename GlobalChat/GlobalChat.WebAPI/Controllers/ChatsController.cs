@@ -97,6 +97,4 @@ namespace GlobalChat.WebApi.Controllers
     }
 }
 
-    // Obtener lista de mensajes con una persona. Ultima sesion del usuario.
-
     

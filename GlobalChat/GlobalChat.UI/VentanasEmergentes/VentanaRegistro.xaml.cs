@@ -14,27 +14,27 @@ public partial class VentanaRegistro : ContentPage
         GridDatos.BindingContext = NuevoUsuario;
 	}
 
-    private void CrearCuenta_Clicked(object sender, EventArgs e)
+    private async void CrearCuenta_Clicked(object sender, EventArgs e)
     {
         bool correcto = true;
         if (string.IsNullOrEmpty(NuevoUsuario.Nombre))
         {
             correcto = false;
-            DisplayAlert("Error", "Tienes que rellenar el nombre!", "OK");
+            await DisplayAlert("Error", "Tienes que rellenar el nombre!", "OK");
         }
         if (string.IsNullOrEmpty(NuevoUsuario.NombreLogin))
         {
             correcto = false;
-            DisplayAlert("Error", "Tienes que rellenar el nombre de login!", "OK");
+            await DisplayAlert("Error", "Tienes que rellenar el nombre de login!", "OK");
         }
         if (string.IsNullOrEmpty(NuevoUsuario.Password))
         {
             correcto = false;
-            DisplayAlert("Error", "Tienes que rellenar la contraseña!", "OK");
+            await DisplayAlert("Error", "Tienes que rellenar la contraseña!", "OK");
         }
         if (correcto)
         {
-            Task.Run(CrearUsuarioAsync);
+            await CrearUsuarioAsync();
         }
     }
 

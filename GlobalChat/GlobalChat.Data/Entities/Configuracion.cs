@@ -14,7 +14,7 @@ namespace GlobalChat.Data.Entities
         // Se crea la relación entre ambas entidades
         [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
-        public virtual Usuario Usuario { get; set;} = new Usuario();
+        public virtual Usuario? Usuario { get; set;}
     }
 
     
