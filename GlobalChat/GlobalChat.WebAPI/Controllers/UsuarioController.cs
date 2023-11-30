@@ -19,7 +19,7 @@ namespace GlobalChat.WebApi.Controllers
         }
 
         [HttpGet("ObtenerUsuario/{id}")]
-        public async Task<PeticionDto<UsuarioDto>> ObtenerUsuario(int id) 
+        public PeticionDto<UsuarioDto> ObtenerUsuario(int id) 
         {
             Usuario usuario = context.Usuarios.Where(x  => x.Id == id).First();
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
@@ -62,7 +62,7 @@ namespace GlobalChat.WebApi.Controllers
         }
 
         [HttpPut("LoginUsuario")]
-        public async Task<PeticionDto<UsuarioDto>> LoginUsuario([FromBody] UsuarioDto usuarioLogin)
+        public PeticionDto<UsuarioDto> LoginUsuario([FromBody] UsuarioDto usuarioLogin)
         {
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
             peticionDto.PeticionCorrecta = context.Usuarios.Where(x => x.NombreLogin == usuarioLogin.NombreLogin && x.Password == usuarioLogin.Password).Any();
@@ -75,7 +75,7 @@ namespace GlobalChat.WebApi.Controllers
         }
 
         [HttpGet("ObtenerConfiguracion/{idUsuario}")]
-        public async Task<PeticionDto<ConfiguracionDto>> ObtenerConfiguracion(int idUsuario)
+        public PeticionDto<ConfiguracionDto> ObtenerConfiguracion(int idUsuario)
         {
             PeticionDto<ConfiguracionDto> peticionDto = new PeticionDto<ConfiguracionDto>();
             Configuracion config = context.Configuraciones.Where(x => x.IdUsuario == idUsuario).First();

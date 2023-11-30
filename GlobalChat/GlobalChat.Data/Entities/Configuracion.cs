@@ -10,11 +10,11 @@ namespace GlobalChat.Data.Entities
     public record Configuracion
     {
         public int Id { get; set; }
-        public string JsonConfig { get; set; }
+        public string JsonConfig { get; set; } = string.Empty;
         // Se crea la relación entre ambas entidades
         [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
-        public virtual Usuario Usuario { get; set;}
+        public virtual Usuario Usuario { get; set;} = new Usuario();
     }
 
     

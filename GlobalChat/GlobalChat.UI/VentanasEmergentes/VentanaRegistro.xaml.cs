@@ -34,7 +34,7 @@ public partial class VentanaRegistro : ContentPage
         }
         if (correcto)
         {
-            CrearUsuarioAsync();
+            Task.Run(CrearUsuarioAsync);
         }
     }
 

@@ -14,7 +14,6 @@ namespace GlobalChat.UI
         {
             Cliente = new HttpClient();
             Cliente.BaseAddress = new Uri(URLBASE);
-            
         }
     }
 }

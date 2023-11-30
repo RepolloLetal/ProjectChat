@@ -9,6 +9,6 @@ namespace GlobalChat.Business.Dtos
     public class NuevoContactoDto
     {
         public int IdUsuarioActual { get; set; }
-        public string NombreContacto { get; set; }
+        public string NombreContacto { get; set; } = string.Empty;
     }
 }

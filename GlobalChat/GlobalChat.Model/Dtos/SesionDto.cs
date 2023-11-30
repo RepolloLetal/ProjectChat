@@ -9,7 +9,7 @@ namespace GlobalChat.Business.Dtos
     public class SesionDto
     {
         public int Id { get; set; }
-        public string DiaHoraSesion { get; set; }
+        public string DiaHoraSesion { get; set; } = string.Empty;
         public int IdUsuario { get; set; }
     }
 }

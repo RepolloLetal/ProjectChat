@@ -9,8 +9,8 @@ namespace GlobalChat.Data.Entities
     public record Sesion
     {
         public int Id { get; set; }
-        public string DiaHoraSesion { get; set; }
+        public string DiaHoraSesion { get; set; } = string.Empty;
         public int IdUsuario { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; } = new Usuario();
     }
 }

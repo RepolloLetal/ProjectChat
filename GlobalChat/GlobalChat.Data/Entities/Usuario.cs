@@ -10,10 +10,10 @@ namespace GlobalChat.Data.Entities
     public record Usuario
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string NombreLogin { get; set; }
-        public string Password { get; set; }
-        public virtual Configuracion Configuracion { get; set; }
-        public virtual ICollection<UsuarioChat> UsuarioChat { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string NombreLogin { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public virtual Configuracion Configuracion { get; set; } = new Configuracion();
+        public virtual ICollection<UsuarioChat> UsuarioChat { get; set; } = new List<UsuarioChat>();
     }
 }

@@ -11,8 +11,8 @@ namespace GlobalChat.Data.Entities
     public record UsuarioChat
     {
         public int IdUsuario { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; } = new Usuario();
         public int IdChat {  get; set; }
-        public virtual Chat Chat { get; set; }
+        public virtual Chat? Chat { get; set; }
     }
 }
