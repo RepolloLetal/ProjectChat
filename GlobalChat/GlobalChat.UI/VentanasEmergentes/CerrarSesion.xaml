@@ -4,22 +4,22 @@
              x:Class="GlobalChat.UI.VentanasEmergentes.CerrarSesion"
              Title="CerrarSesion">
     <Grid>
-        <Border BackgroundColor="#94869F" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+        <Border BackgroundColor="#382745" Margin="20" WidthRequest="400" HeightRequest="250" HorizontalOptions="Center">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="50"/>
             </Border.StrokeShape>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="¿Estás seguro de querer cerrar la sesión actual?" FontAttributes="Bold" FontFamily="Arial"/>
-                <Button Grid.Row="1" Grid.Column="0" Text="Sí" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745"/>
-                <Button Grid.Row="1" Grid.Column="1" Text="No" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="¿Estás seguro de querer cerrar la sesión actual?" FontAttributes="Bold" FontFamily="Arial" HorizontalTextAlignment="Center" FontSize="20" Margin="25"/>
+                <Button Grid.Row="1" Grid.Column="0" Text="Sí" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745" Margin="20"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="No" FontAttributes="Bold" FontFamily="Arial" CornerRadius="30" BorderColor="#382745" Margin="20"/>
             </Grid>
         </Border>
     </Grid>

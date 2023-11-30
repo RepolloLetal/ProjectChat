@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:GlobalChat.UI.Menus"
              xmlns:paginas="clr-namespace:GlobalChat.UI.Paginas"
              xmlns:ventanasemergentes="clr-namespace:GlobalChat.UI.VentanasEmergentes"
-             Title="MenuPrincipal">
+             Title="MenuPrincipal" BackgroundColor="#21052A">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -27,7 +27,7 @@
                     <!--<local:ElementoMenu Titulo="Favoritos"-->
                     <!--Icono="favoritos.png"-->
                     <local:ElementoMenu Titulo="Login"
-                                    PaginaObjetivo="{x:Type VentanasEmergentes:VentanaLogin}"/>
+                                    PaginaObjetivo="{x:Type ventanasemergentes:AgregarNuevoContacto}"/>
                     <local:ElementoMenu Titulo="Archivado"
                               Icono="archivados.png"
                                     PaginaObjetivo="{x:Type paginas:Archivado}"/>

@@ -4,19 +4,20 @@
              x:Class="GlobalChat.UI.VentanasEmergentes.AgregarNuevoContacto"
              Title="AgregarNuevoContacto">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Border BackgroundColor="#382745" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+        
+        <Border BackgroundColor="#382745" Margin="20" WidthRequest="500" HeightRequest="350" HorizontalOptions="Center">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="50"/>
             </Border.StrokeShape>
             <Grid>
-                <Label Grid.Row="0" Text="Añadir nuevo contacto" FontAttributes="Bold" FontFamily="Arial" TextColor="#FEFFFF"/>
-                <Entry Grid.Row="1" Text="Puedes añadir contactos escribiendo su E-mail" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#0D0D0D"/>
-                <Button Grid.Row="2" Text="Agregar" BackgroundColor="#655274" TextColor="#FEFFFF" CornerRadius="30" FontFamily="Arial"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Añadir nuevo contacto" FontAttributes="Bold" FontFamily="Arial" TextColor="#FEFFFF" HorizontalOptions="Center" Margin="30" FontSize="20"/>
+                <Entry Grid.Row="1" Text="Puedes añadir contactos escribiendo su nombre de usuario" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#636363" Margin="15" FontAttributes="Bold"/>
+                <Button Grid.Row="2" Text="Agregar" TextColor="#FEFFFF" CornerRadius="30" FontFamily="Arial" Margin="15" FontAttributes="Bold"/>
             </Grid>
         </Border>
     </Grid>

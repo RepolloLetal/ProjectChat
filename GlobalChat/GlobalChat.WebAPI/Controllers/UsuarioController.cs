@@ -19,35 +19,78 @@ namespace GlobalChat.WebApi.Controllers
         }
 
         [HttpGet("ObtenerUsuario/{id}")]
-        public async Task<UsuarioDto> ObtenerUsuario(int id) 
+        public async Task<PeticionDto<UsuarioDto>> ObtenerUsuario(int id) 
         {
             Usuario usuario = context.Usuarios.Where(x  => x.Id == id).First();
+            PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
 
             if (usuario != null) 
             {
                 UsuarioDto usuarioDto = mapper.Map<UsuarioDto>(usuario);
-                return usuarioDto;
+                peticionDto.PeticionCorrecta = true;
+                peticionDto.Value = usuarioDto;
             }
             else
             {
-                return new UsuarioDto();
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Usuario no encontrado";
             }
+            return peticionDto;
         }
 
         [HttpPost("RegistrarUsuario")]
-        public async Task<UsuarioDto> RegistrarUsuario([FromBody]UsuarioDto nuevoUsuario) 
+        public async Task<PeticionDto<UsuarioDto>> RegistrarUsuario([FromBody]UsuarioDto nuevoUsuario) 
         {
             Usuario usuario = mapper.Map<Usuario>(nuevoUsuario);
-            await context.Usuarios.AddAsync(usuario);
-            await context.SaveChangesAsync();
-            return mapper.Map<UsuarioDto>(usuario);
+            PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
+
+            if (context.Usuarios.Where(x => x.NombreLogin == nuevoUsuario.NombreLogin).Any())
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Nombre de usuario ya registrado";
+            }
+            else
+            {
+                await context.Usuarios.AddAsync(usuario);
+                await context.SaveChangesAsync();
+                UsuarioDto nuevoUsuarioDto = mapper.Map<UsuarioDto>(usuario);
+                peticionDto.Value = nuevoUsuarioDto;
+                peticionDto.PeticionCorrecta = true;
+            }
+ 
+            return peticionDto;
         }
 
         [HttpPut("LoginUsuario")]
-        public async Task<bool> LoginUsuario([FromBody] UsuarioDto usuarioLogin)
+        public async Task<PeticionDto<UsuarioDto>> LoginUsuario([FromBody] UsuarioDto usuarioLogin)
         {
-            int loginCorrecto = context.Usuarios.Where(x => x.NombreLogin == usuarioLogin.NombreLogin && x.Password == usuarioLogin.Password).Count();
-            return loginCorrecto > 0;
+            PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
+            peticionDto.PeticionCorrecta = context.Usuarios.Where(x => x.NombreLogin == usuarioLogin.NombreLogin && x.Password == usuarioLogin.Password).Any();
+            if (!peticionDto.PeticionCorrecta)
+            {
+                peticionDto.MensajeError = "Usuario y/o contraseña incorrectos";
+            }
+            peticionDto.Value = usuarioLogin;
+            return peticionDto;
+        }
+
+        [HttpGet("ObtenerConfiguracion/{idUsuario}")]
+        public async Task<PeticionDto<ConfiguracionDto>> ObtenerConfiguracion(int idUsuario)
+        {
+            PeticionDto<ConfiguracionDto> peticionDto = new PeticionDto<ConfiguracionDto>();
+            Configuracion config = context.Configuraciones.Where(x => x.IdUsuario == idUsuario).First();
+
+            if (config != null)
+            {
+                peticionDto.PeticionCorrecta = true;
+                peticionDto.Value = mapper.Map<ConfiguracionDto>(config);
+            }
+            else
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "No se ha encontrado la configuración del usuario";
+            }
+            return peticionDto;
         }
     }
 }

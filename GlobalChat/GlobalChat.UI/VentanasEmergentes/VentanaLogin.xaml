@@ -4,23 +4,23 @@
              x:Class="GlobalChat.UI.VentanasEmergentes.VentanaLogin"
              Title="VentanaLogin">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Border BackgroundColor="#382745" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+        <Border BackgroundColor="#382745" Margin="20" WidthRequest="600" HeightRequest="500">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="50"/>
             </Border.StrokeShape>
             <Grid>
-                <Label Grid.Row="0" Text="Iniciar sesión" TextColor="#0D0D0D" FontAttributes="Bold" FontFamily="Arial"/>
-                <Entry Grid.Row="1" Text="E-mail" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#0D0D0D"/>
-                <Entry Grid.Row="2" Text="Contraseña" BackgroundColor="#DCD6DF" IsPassword="True" FontFamily="Arial" TextColor="#0D0D0D"/>
-                <Button Grid.Row="3" Text="Iniciar sesión" BackgroundColor="#655274" TextColor="#FEFFFF" CornerRadius="30" FontFamily="Arial"/>
-                <Button Grid.Row="4" Text="Crear cuenta" TextColor="#FEFFFF" FontAttributes="Bold" FontFamily="Arial"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="90"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Iniciar sesión" TextColor="#DCD6DF" FontAttributes="Bold" FontFamily="Arial" HorizontalOptions="Center" Margin="30" FontSize="20"/>
+                <Entry Grid.Row="1" Text="Nombre de usuario" BackgroundColor="#DCD6DF" IsPassword="False" FontFamily="Arial" TextColor="#636363" Margin="15" FontAttributes="Bold"/>
+                <Entry Grid.Row="2" Text="Contraseña" BackgroundColor="#DCD6DF" IsPassword="True" FontFamily="Arial" TextColor="#636363" Margin="15"/>
+                <Button Grid.Row="3" Text="Iniciar sesión"  TextColor="#FEFFFF" FontAttributes="Bold" CornerRadius="30" FontFamily="Arial" Margin="15"/>
+                <Button Grid.Row="4" Text="Crear cuenta" TextColor="#FEFFFF" FontAttributes="Bold" FontFamily="Arial" Margin="15" CornerRadius="30"/>
             </Grid>
         </Border>
     </Grid>
