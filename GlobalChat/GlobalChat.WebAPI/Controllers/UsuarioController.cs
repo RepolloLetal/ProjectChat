@@ -129,6 +129,7 @@ namespace GlobalChat.WebApi.Controllers
             {
                 peticionDto.PeticionCorrecta = true;
                 context.Usuarios.Remove(usuario);
+                await context.SaveChangesAsync();
             }
             else
             {
