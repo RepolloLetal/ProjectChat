@@ -1,4 +1,5 @@
 ﻿using GlobalChat.UI.Menus;
+using GlobalChat.UI.VentanasEmergentes;
 
 namespace GlobalChat.UI
 {
@@ -8,6 +9,7 @@ namespace GlobalChat.UI
         {
             InitializeComponent();
             flyoutMenu.elementosMenu.SelectionChanged += OnSelectionChanged;
+            
         }
 
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -19,6 +21,23 @@ namespace GlobalChat.UI
                 if (!((IFlyoutPageController)this).ShouldShowSplitMode)
                     IsPresented = false;
             }
+        }
+
+        private void ComprobarSesion()
+        {
+            if (ServicioPersistencia.SesionIniciada)
+            {
+
+            }
+            else
+            {
+                Navigation.PushModalAsync(new VentanaLogin());
+            }
+        }
+
+        private void FlyoutPage_Loaded(object sender, EventArgs e)
+        {
+           ComprobarSesion();
         }
     }
 

@@ -7,11 +7,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="550"/>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="9*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="#9E87B0" HeightRequest="90" WidthRequest="1500"/>
@@ -24,7 +24,7 @@
 
             </Grid>
         </Border>
-        <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black"/>
+        <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black" Margin="5"/>
     </Grid>
     
 </ContentPage>
