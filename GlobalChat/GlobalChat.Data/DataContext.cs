@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GlobalChat.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,16 @@ namespace GlobalChat.Data
                 optionsBuilder.UseSqlServer(Configuration.GetConnectionString("WebAPIDatabase"));
             }
         }
+
+        // Agregar tablas
+
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Configuracion> Configuraciones { get; set; }
+        public DbSet<Contactos> Contactos { get; set; }
+        public DbSet<Mensaje> Mensajes { get; set; }
+        public DbSet<Sesiones> Sesiones { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<UsuarioChat> Usuarioschats { get; set; }
 
     }
 }
