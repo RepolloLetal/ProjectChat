@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GlobalChat.MAUI.Menus.MenuPrincipal"
              xmlns:local="clr-namespace:GlobalChat.MAUI.Menus"
+             xmlns:paginas="clr-namespace:GlobalChat.MAUI.Paginas"
              Title="MenuPrincipal"
              BackgroundColor="#382745">
 
@@ -22,15 +23,20 @@
             <CollectionView.ItemsSource>
                 <x:Array Type="{x:Type local:ElementoMenu}">
                     <local:ElementoMenu Titulo="Chats"
-                                  Icono="chats.png"/>
+                                  Icono="chats.png"
+                                        PaginaObjetivo="{x:Type paginas:Chats}"/>
                     <local:ElementoMenu Titulo="Favoritos"
-                                  Icono="favoritos.png"/>
+                                  Icono="favoritos.png"
+                                        PaginaObjetivo="{x:Type paginas:Favoritos}"/>
                     <local:ElementoMenu Titulo="Archivado"
-                                  Icono="archivados.png"/>
+                                  Icono="archivados.png"
+                                        PaginaObjetivo="{x:Type paginas:Archivado}"/>
                     <local:ElementoMenu Titulo="Contactos"
-                                  Icono="contactos.png"/>
+                                  Icono="contactos.png"
+                                        PaginaObjetivo="{x:Type paginas:Contactos}"/>
                     <local:ElementoMenu Titulo="Ajustes"
-                                  Icono="ajustes.png"/>
+                                  Icono="ajustes.png"
+                                        PaginaObjetivo="{x:Type paginas:Ajustes}"/>
                 </x:Array>
             </CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>

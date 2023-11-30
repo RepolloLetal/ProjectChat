@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:GlobalChat.MAUI"
              xmlns:menus="clr-namespace:GlobalChat.MAUI.Menus"
-             x:Class="GlobalChat.MAUI.MainPage">
+             x:Class="GlobalChat.MAUI.MainPage"
+            Title="PaginaPrincipal">
     <FlyoutPage.Flyout>
-        <menus:MenuPrincipal/>
+        <menus:MenuPrincipal x:Name="flyoutMenu"/>
     </FlyoutPage.Flyout>
     
     <FlyoutPage.Detail>
