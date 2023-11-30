@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GlobalChat.Data.Entities
 {
-    public record Contactos
+    public record Contacto
     {
         public int Id { get; set; }
         public int IdUsuarioA { get; set; }

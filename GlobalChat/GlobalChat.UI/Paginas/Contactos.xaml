@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GlobalChat.UI.Paginas.Contactos"
+             xmlns:menus="clr-namespace:GlobalChat.UI.Menus"
+             Title="Contactos" BackgroundColor="#9E87B0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="White" CancelButtonColor="Beige" BackgroundColor="#E8DFEB" HorizontalOptions="Start" WidthRequest="650" HeightRequest="40" Margin="20" TextColor="Black"/>
+        <Ellipse Grid.Row="0" HorizontalOptions="End" WidthRequest="55" HeightRequest="55" Margin="10" Fill="White"/>
+        <ImageButton Source="adduser.png" Grid.Row="0" HorizontalOptions="End" WidthRequest="60" HeightRequest="60" Margin="5"/>
+        <CollectionView x:Name="elementosMenu"
+    x:FieldModifier="public"
+    SelectionMode="Single" Grid.Row="2">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type menus:ElementoMenu}">
+                    <menus:ElementoMenu Contacto="Chats"
+                      Icono="trash.png"
+                      Perfil="perfil1.png"/>
+                    <menus:ElementoMenu Contacto="Favoritos"
+                      Icono="trash.png"
+                      Perfil="perfil2.png"/>
+                    <menus:ElementoMenu Contacto="Archivado"
+                      Icono="trash.png"/>
+                    <menus:ElementoMenu Contacto="Contactos"
+                      Icono="trash.png"/>
+                    <menus:ElementoMenu Contacto="Ajustes"
+                      Icono="trash.png"/>
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F6E9F7"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Contacto}" FontSize="25" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black" Padding="20"/>
+                        <ImageButton Source="{Binding Icono}" Grid.Column="2" HorizontalOptions="End" WidthRequest="25"/>
+                        <Ellipse Grid.Column="0" HorizontalOptions="Start" WidthRequest="70" HeightRequest="70" Margin="10" Fill="White"/>
+                        <Image Source="{Binding Perfil}" Grid.Column="0" HorizontalOptions="Start" WidthRequest="70" Margin="10"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

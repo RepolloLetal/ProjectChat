@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="GlobalChat.UI.MainPage"
+            xmlns:local="clr-namespace:GlobalChat.UI"
+            xmlns:menus="clr-namespace:GlobalChat.UI.Menus">
+    <FlyoutPage.Flyout>
+        <menus:MenuPrincipal x:Name="flyoutMenu"/>
+    </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <ContentPage>
+            <Label
+            HorizontalOptions="Center"
+            Text="Conversacion"
+            VerticalOptions="Center" />
+        </ContentPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>

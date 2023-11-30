@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalChat.Business", "Glob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalChat.WebApi", "GlobalChat.WebApi\GlobalChat.WebApi.csproj", "{82519789-6FA1-4EB2-8882-781A75860C7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalChat.MAUI", "GlobalChat.MAUI\GlobalChat.MAUI.csproj", "{BEF463B9-7F8C-413A-AE84-B071ABC9130E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalChat.UI", "GlobalChat.UI\GlobalChat.UI.csproj", "{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,12 +32,12 @@ Global
 		{82519789-6FA1-4EB2-8882-781A75860C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82519789-6FA1-4EB2-8882-781A75860C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82519789-6FA1-4EB2-8882-781A75860C7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEF463B9-7F8C-413A-AE84-B071ABC9130E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA9F791A-5AB9-4011-AE41-0BDEB2191A9F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
