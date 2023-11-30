@@ -12,7 +12,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BackgroundColor="#E1D9E9" Margin="20" WidthRequest="600" HorizontalOptions="Start">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border BackgroundColor="#E1D9E9" Margin="20" WidthRequest="600" HorizontalOptions="Start" Grid.Column="0">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="50"/>
             </Border.StrokeShape>
@@ -38,18 +42,60 @@
                     </Border.StrokeShape>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Entry Grid.Row="0" BackgroundColor="#E1D9E9" FontAttributes="Bold" TextColor="#3E2951" Margin="20" FontSize="17" Text="{Binding Nombre}" IsReadOnly="True" x:Name="EntryNombre"/>
-                        <Entry Grid.Row="1" BackgroundColor="#E1D9E9" FontAttributes="Bold" TextColor="#3E2951" Margin="20" FontSize="17" Text="{Binding NombreLogin}" IsReadOnly="True" x:Name="EntryNombreLogin"/>
+                        <Entry Grid.Row="0" BackgroundColor="#E1D9E9" FontAttributes="Bold" TextColor="#3E2951" Margin="15" FontSize="17" Text="{Binding Nombre}" IsReadOnly="True" x:Name="EntryNombre"/>
+                        <Entry Grid.Row="1" BackgroundColor="#E1D9E9" FontAttributes="Bold" TextColor="#3E2951" Margin="15" FontSize="17" Text="{Binding NombreLogin}" IsReadOnly="True" x:Name="EntryNombreLogin"/>
                     </Grid>
                 </Border>
             </Grid>
         </Border>
-        <Button Grid.Row="2" BackgroundColor="#94869F" Text="Cambiar contraseña" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
-        <Button Grid.Row="3" BackgroundColor="#94869F" Text="Eliminar cuenta" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
-        <Button Grid.Row="4" BackgroundColor="#94869F" Text="Acerca de" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0"/>
+        <Button Grid.Row="2" BackgroundColor="#94869F" Text="Cambiar contraseña" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="MostrarEditarContra_Clicked"/>
+        <Button Grid.Row="3" BackgroundColor="#94869F" Text="Eliminar cuenta" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="EliminarCuenta_Clicked"/>
+        <Button Grid.Row="4" BackgroundColor="#94869F" Text="Acerca de" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="AcercaDe_Clicked"/>
 
+        <Border Grid.Column="1" BackgroundColor="#E1D9E9" Margin="20" HorizontalOptions="End" IsVisible="false" x:Name="BorderContra">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40"/>
+            </Border.StrokeShape>
+            <Grid x:Name="GridContra">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Cambiar contraseña" TextColor="#333333" FontSize="20" FontAttributes="Bold" Margin="15" WidthRequest="550"/>
+                <Label Grid.Row="1" Text="Introduzca contraseña antigua" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5"/>
+                <Entry Grid.Row="2" PlaceholderColor="LightGrey" BackgroundColor="#94869F" IsPassword="True" x:Name="passVieja"/>
+                <Label Grid.Row="3" Text="Introduzca contraseña nueva" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5"/>
+                <Entry Grid.Row="4" PlaceholderColor="LightGrey" BackgroundColor="#94869F" IsPassword="True"/>
+                <Button Grid.Row="5" Text="Confirmar cambios" HorizontalOptions="End" TextColor="#333333" FontAttributes="Bold" FontSize="18" Clicked="EditarContra_Clicked"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" BackgroundColor="#E1D9E9" Margin="20" HorizontalOptions="End" IsVisible="false" x:Name="BorderAcercaDe">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40"/>
+            </Border.StrokeShape>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="40"/>
+                 </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Acerca de..." TextColor="#333333" FontSize="20" FontAttributes="Bold" Margin="15" WidthRequest="550"/>
+                <Label Grid.Row="1" Text="BLABLABLABLABLABLA" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </Border>
     </Grid>
+    
 </ContentPage>

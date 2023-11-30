@@ -115,6 +115,30 @@ namespace GlobalChat.WebApi.Controllers
             return peticionDto;
         }
 
+        [HttpPost("EliminarUsuario")]
+        public async Task<PeticionDto<UsuarioDto>> EliminarUsuario([FromBody] PeticionDto<UsuarioDto> EliminaUsuario)
+        {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(EliminaUsuario.TokenPeticion))
+                return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
+            Usuario usuario = context.Usuarios.Where(x => x.Id == EliminaUsuario.Value.Id).First();
+            PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
+
+            if (usuario !=null)
+            {
+                peticionDto.PeticionCorrecta = true;
+                context.Usuarios.Remove(usuario);
+            }
+            else
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Cuenta no encontrada, no se pudo eliminar";
+            }
+
+            return peticionDto;
+        }
+
         [HttpPost("ObtenerConfiguracion")]
         public PeticionDto<ConfiguracionDto> ObtenerConfiguracion(PeticionDto<int> idUsuario)
         {
