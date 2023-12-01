@@ -9,7 +9,7 @@ namespace GlobalChat.Data.Entities
     public record Chat
     {
         public int Id { get; set; }
-        public string NombreChat { get; set; } = string.Empty;
         public virtual ICollection<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
+        public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

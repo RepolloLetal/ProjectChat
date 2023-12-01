@@ -9,10 +9,10 @@ namespace GlobalChat.Business.Dtos
     public class MensajeDto
     {
         public int Id { get; set; }
-        public string ContenidoJson { get; set; } = string.Empty;
+        public string Contenido { get; set; } = string.Empty;
         public string DiaHoraMens { get; set; } = string.Empty;
-        public int IdUsuario { get; set; }
-        public int IdChat { get; set; }
+        public UsuarioDto Usuario { get; set; } = new UsuarioDto();
+        public ChatDto Chat { get; set; } = new ChatDto();
 
     }
 }

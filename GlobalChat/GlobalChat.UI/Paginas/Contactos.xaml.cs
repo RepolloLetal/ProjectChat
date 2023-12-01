@@ -7,14 +7,31 @@ namespace GlobalChat.UI.Paginas;
 
 public partial class Contactos : ContentPage
 {
-	List<ContactoCompletoDto> contactosCompletos = new List<ContactoCompletoDto>();
-	public Contactos()
+    private List<ContactoCompletoDto> contactosCompletos = new List<ContactoCompletoDto>();
+    private List<ContactoComp> contactosCompletosComp = new List<ContactoComp>();
+
+    public Contactos()
 	{
 		InitializeComponent();
 		CargarContactos();
     }
 
-	public async void CargarContactos()
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        foreach (ContactoComp componente in contactosCompletosComp)
+        {
+            if (componente.ContactoCompleto.NombreUsuario.ToLower().Contains(e.NewTextValue.ToLower()))
+            {
+                componente.IsVisible = true;
+            }
+            else
+            {
+                componente.IsVisible = false;
+            }
+        }
+    }
+
+    private async void CargarContactos()
 	{
         PeticionDto<int> peticionEdi = new PeticionDto<int>() { TokenPeticion = ServicioAPI.TokenUsuario, Value = ServicioAPI.Usuario.Id };
         HttpResponseMessage respuesta = await ServicioAPI.Cliente.PostAsJsonAsync("api/Contactos/ObtenerListaContactos", peticionEdi, new JsonSerializerOptions(JsonSerializerDefaults.Web));
@@ -43,13 +60,15 @@ public partial class Contactos : ContentPage
         }
     }
 
-    public void MostrarContactos()
+    private void MostrarContactos()
     {
+        contactosCompletosComp.Clear();
         elementosMenu.Clear();
         foreach (var contacto in contactosCompletos)
         {
             ContactoComp comp = new ContactoComp(contacto, true);
             elementosMenu.Add(comp);
+            contactosCompletosComp.Add(comp);
         }
     }
 

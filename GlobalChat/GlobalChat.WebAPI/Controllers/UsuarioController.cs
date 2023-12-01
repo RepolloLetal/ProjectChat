@@ -94,8 +94,6 @@ namespace GlobalChat.WebApi.Controllers
                 return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             Usuario usuario = mapper.Map<Usuario>(usuarioEdicion.Value);
-            usuario.Configuracion = null;
-            usuario.UsuarioChat = null;
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
 
             if (context.Usuarios.Where(x => x.NombreLogin == usuario.NombreLogin && x.Id != usuario.Id).Any())
@@ -140,27 +138,5 @@ namespace GlobalChat.WebApi.Controllers
             return peticionDto;
         }
 
-        [HttpPost("ObtenerConfiguracion")]
-        public PeticionDto<ConfiguracionDto> ObtenerConfiguracion(PeticionDto<int> idUsuario)
-        {
-            //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
-                return new PeticionDto<ConfiguracionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
-
-            PeticionDto<ConfiguracionDto> peticionDto = new PeticionDto<ConfiguracionDto>();
-            Configuracion config = context.Configuraciones.Where(x => x.IdUsuario == idUsuario.Value).First();
-
-            if (config != null)
-            {
-                peticionDto.PeticionCorrecta = true;
-                peticionDto.Value = mapper.Map<ConfiguracionDto>(config);
-            }
-            else
-            {
-                peticionDto.PeticionCorrecta = false;
-                peticionDto.MensajeError = "No se ha encontrado la configuración del usuario";
-            }
-            return peticionDto;
-        }
     }
 }

@@ -12,7 +12,6 @@ namespace GlobalChat.Business.Dtos
         public string Nombre { get; set; } = string.Empty;
         public string NombreLogin { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public ConfiguracionDto Configuracion { get; set; } = new ConfiguracionDto();
-        public List<UsuarioChatDto> Chats { get; set; } = new List<UsuarioChatDto>();
+        public List<ChatDto> Chats { get; set; } = new List<ChatDto>();
     }
 }

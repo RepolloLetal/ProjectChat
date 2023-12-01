@@ -9,9 +9,11 @@
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="White" CancelButtonColor="Beige" BackgroundColor="#E8DFEB" HorizontalOptions="Start" WidthRequest="650" HeightRequest="40" Margin="20" TextColor="#0D0D0D"/>
+        <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="DarkGrey" CancelButtonColor="black" BackgroundColor="#E8DFEB" HorizontalOptions="Start" WidthRequest="650" HeightRequest="40" Margin="20" TextColor="#0D0D0D" TextChanged="SearchBar_TextChanged"/>
         <Ellipse Grid.Row="0" HorizontalOptions="End" WidthRequest="55" HeightRequest="55" Margin="10" Fill="White"/>
         <ImageButton Source="adduser.png" Grid.Row="0" HorizontalOptions="End" WidthRequest="60" HeightRequest="60" Margin="5" Clicked="AgregarContacto_Clicked"/>
-        <StackLayout Margin="5" x:Name="elementosMenu" Grid.Row="1" VerticalOptions="Start"/>
+        <ScrollView Grid.Row="1" Margin="5">
+            <StackLayout x:Name="elementosMenu" VerticalOptions="Start"/>
+        </ScrollView>
     </Grid>
 </ContentPage>

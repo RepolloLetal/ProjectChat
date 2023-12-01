@@ -8,6 +8,7 @@ namespace GlobalChat.UI.Componentes;
 public partial class ContactoComp : ContentView
 {
     public ContactoCompletoDto ContactoCompleto { get; set; }
+    public event EventHandler? Selected;
     private bool canEdit;
 
     public ContactoComp(ContactoCompletoDto contactoCompleto, bool canEdit = false)
@@ -115,5 +116,8 @@ public partial class ContactoComp : ContentView
         }
     }
 
-    
+    private void Contacto_Clicked(object sender, EventArgs e)
+    {
+        Selected?.Invoke(ContactoCompleto, e);
+    }
 }

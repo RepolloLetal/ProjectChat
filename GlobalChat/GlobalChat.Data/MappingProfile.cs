@@ -14,12 +14,10 @@ namespace GlobalChat.Data
         public MappingProfile() 
         {
             CreateMap<Chat, ChatDto>().ReverseMap();
-            CreateMap<Configuracion, ConfiguracionDto>().ReverseMap();
             CreateMap<Contacto, ContactoDto>().ReverseMap();
             CreateMap<Mensaje, MensajeDto>().ReverseMap();
             CreateMap<Sesion, SesionDto>().ReverseMap();
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
-            CreateMap<UsuarioChat, UsuarioChatDto>().ReverseMap();
         }
     }
 }

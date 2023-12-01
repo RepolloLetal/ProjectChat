@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GlobalChat.UI.Componentes.BurbujaChat">
+             x:Class="GlobalChat.UI.Componentes.BurbujaChat" Background="Transparent" HorizontalOptions="Start">
     <Grid x:Name="DatosGridBurbuja">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border x:Name="BorderMensaje" BackgroundColor="#2D0631" Grid.Row="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="35"/>
+            </Border.StrokeShape>
+            <Label Text="{Binding Contenido}" Margin="15"/>
+        </Border>
+        <Label Text="{Binding DiaHoraMens}" TextColor="#333333" FontSize="12" FontAttributes="Bold" Grid.Row="1" Margin="15" HorizontalOptions="End" x:Name="LblMen"/>
     </Grid>
 </ContentView>

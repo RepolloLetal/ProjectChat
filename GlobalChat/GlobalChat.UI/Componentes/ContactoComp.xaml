@@ -5,7 +5,7 @@
              x:Name="ContactoComponente" VerticalOptions="Start"
              Margin="5">
 
-    <Grid x:Name="DatosGridComp" BackgroundColor="#F6E9F7">
+    <Grid x:Name="DatosGridComp">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="5*"/>
@@ -16,10 +16,11 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="#F6E9F7" Clicked="Contacto_Clicked"/>
         <Image Source="usuario.png" Grid.Row="0" Grid.RowSpan="2" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start"/>
         <Label Text="{Binding NombreUsuario}" FontFamily="Arial" FontAttributes="Bold" FontSize="20" TextColor="DarkGray" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalOptions="Start"/>
         <Label Text="{Binding UltSesion}" FontFamily="Arial" FontAttributes="Bold" FontSize="15" TextColor="DarkGray" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalOptions="Start"/>
         <ImageButton Source="favoritovacio.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" HeightRequest="50" WidthRequest="50" x:Name="img" Clicked="Img_Clicked"/>
-        <ImageButton Source="trash.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" HeightRequest="50" WidthRequest="50" x:Name="imgBrr" Clicked="ImgBrr_Clicked"/>
+        <ImageButton Source="trash.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" HeightRequest="50" WidthRequest="50" x:Name="imgBrr" Clicked="ImgBrr_Clicked" Aspect="AspectFit"/>
     </Grid>
 </ContentView>

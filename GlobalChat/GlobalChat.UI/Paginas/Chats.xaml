@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:GlobalChat.UI.Paginas"
-            x:Class="GlobalChat.UI.Paginas.Chats">
-    <FlyoutPage.Flyout FlyoutLayoutBehavior="Split">
-        <local:ContactosListadoChat x:Name="flyoutContactos" />
-    </FlyoutPage.Flyout>
-    <FlyoutPage.Detail>
-        <NavigationPage>
-            <x:Arguments>
-                <local:ChatContacto/>
-            </x:Arguments>
-        </NavigationPage>
-    </FlyoutPage.Detail>
-</FlyoutPage>
+            xmlns:componentebur="clr-namespace:GlobalChat.UI.Componentes"
+            x:Class="GlobalChat.UI.Paginas.Chats" Disappearing="ContentPage_Disappearing">
+
+    <Grid  BackgroundColor="#382745">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <SearchBar Grid.Row="0" Placeholder="..." PlaceholderColor="DarkGrey" CancelButtonColor="black" BackgroundColor="#E8DFEB" WidthRequest="310" HeightRequest="40" Margin="5" TextColor="#0D0D0D" TextChanged="SearchBar_TextChanged"/>
+            <ScrollView Grid.Row="1" Margin="5">
+                <StackLayout x:Name="elementosMenu"  VerticalOptions="Start"/>
+            </ScrollView>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="#9E87B0" Margin="5">
+                <Image Source="usuario.png"/>
+                <Label Text="" TextColor="White" FontAttributes="Bold" Margin="20" FontSize="22" TranslationX="10" TranslationY="5" x:Name="NombreContacto"/>
+            </StackLayout>
+            <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" BackgroundColor="#9E87B0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="35"/>
+                </Border.StrokeShape>
+                <ScrollView>
+                    <StackLayout x:Name="Mensajes" Margin="5"/>
+                </ScrollView>
+            </Border>
+            <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black" Margin="10" x:Name="textInput" Completed="EnvMensaje_Clicked"/>
+            <ImageButton Source="emoticono.png" Grid.Row="2" Grid.Column="3" HorizontalOptions="End" Margin="20" HeightRequest="30" WidthRequest="30" Clicked="Emoticon_Clicked"/>
+            <Ellipse Grid.Row="2" BackgroundColor="#00FFB3" Grid.Column="4" WidthRequest="80" HeightRequest="80"/>
+            <ImageButton Source="send.png" Grid.Row="2" BackgroundColor="Transparent" Grid.Column="4" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" Margin="15" Clicked="EnvMensaje_Clicked"/>
+        </Grid>
+    </Grid>
+    
+
+</ContentPage>

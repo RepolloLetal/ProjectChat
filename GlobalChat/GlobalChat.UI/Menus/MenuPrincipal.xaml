@@ -28,9 +28,6 @@
                     <local:ElementoMenu Titulo="Favoritos"
                               Icono="favoritovacio.png"
                                     PaginaObjetivo="{x:Type paginas:Favoritos}"/>
-                    <local:ElementoMenu Titulo="Archivado"
-                              Icono="archivados.png"
-                                    PaginaObjetivo="{x:Type paginas:Archivado}"/>
                     <local:ElementoMenu Titulo="Contactos"
                               Icono="contactos.png"
                                     PaginaObjetivo="{x:Type paginas:Contactos}"/>

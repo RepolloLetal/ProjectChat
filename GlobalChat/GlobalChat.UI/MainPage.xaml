@@ -11,10 +11,7 @@
 
     <FlyoutPage.Detail>
         <ContentPage>
-            <Label
-            HorizontalOptions="Center"
-            Text="Conversacion"
-            VerticalOptions="Center" />
+            
         </ContentPage>
     </FlyoutPage.Detail>
 </FlyoutPage>

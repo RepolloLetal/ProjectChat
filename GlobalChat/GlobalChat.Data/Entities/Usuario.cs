@@ -13,7 +13,7 @@ namespace GlobalChat.Data.Entities
         public string Nombre { get; set; } = string.Empty;
         public string NombreLogin { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public virtual Configuracion Configuracion { get; set; } = new Configuracion();
-        public virtual ICollection<UsuarioChat> UsuarioChat { get; set; } = new List<UsuarioChat>();
+        public virtual ICollection<Chat> Chats { get; set; } = new List<Chat>();
+        public virtual ICollection<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
     }
 }

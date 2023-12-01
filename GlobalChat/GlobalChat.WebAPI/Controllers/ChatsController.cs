@@ -23,62 +23,96 @@ namespace GlobalChat.WebApi.Controllers
             this.auth = auth;
         }
 
-        [HttpPost("ObtenerMensaje")]
-        public async Task<PeticionDto<MensajeDto>> ObtenerMensaje(PeticionDto<int> idMensaje)
+        [HttpPost("EnviarMensaje")]
+        public async Task<PeticionDto<MensajeDto>> EnviarMensaje(PeticionDto<MensajeDto> mensaje)
         {
             //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idMensaje.TokenPeticion))
+            if (!auth.ComprobarUsuarioValido(mensaje.TokenPeticion))
                 return new PeticionDto<MensajeDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             PeticionDto<MensajeDto> peticionDto = new PeticionDto<MensajeDto>();
-            Mensaje mensaje = context.Mensajes.Where(x => x.Id == idMensaje.Value).First();
-
-            if(mensaje != null) 
+            try
             {
+                Mensaje nuevoMen = mapper.Map<Mensaje>(mensaje.Value);
+                nuevoMen.Chat = context.Chats.Where(x => x.Id == nuevoMen.Chat.Id).First();
+                nuevoMen.Usuario = context.Usuarios.Where(x => x.Id == nuevoMen.Usuario.Id).First();
+                context.Mensajes.Add(nuevoMen);
+                await context.SaveChangesAsync();
                 peticionDto.PeticionCorrecta = true;
-                peticionDto.Value = mapper.Map<MensajeDto>(mensaje);
+                nuevoMen.Chat.Mensajes = new List<Mensaje>();
+                peticionDto.Value = mapper.Map<MensajeDto>(nuevoMen);
             }
-            else
+            catch(Exception e)
             {
                 peticionDto.PeticionCorrecta = false;
-                peticionDto.MensajeError = "No se ha encontrado el mensaje";
+                peticionDto.MensajeError = "Error al enviar el mensaje: " + e.Message;
             }
             return peticionDto;
 
         }
 
-        [HttpPost("ObtenerListaMensajes")]
-        public async Task<PeticionDto<List<MensajeDto>>> ObtenerListaMensajes(PeticionDto<int> idChat)
+        [HttpPost("ObtenerMensajesChat")]
+        public async Task<PeticionDto<ChatDto>> ObtenerMensajesChat(PeticionDto<ContactoDto> contacto)
         {
             //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idChat.TokenPeticion))
-                return new PeticionDto<List<MensajeDto>>() { PeticionCorrecta = false, ErrorPorToken = true };
+            if (!auth.ComprobarUsuarioValido(contacto.TokenPeticion))
+                return new PeticionDto<ChatDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
-            PeticionDto<List<MensajeDto>> peticionDto = new PeticionDto<List<MensajeDto>>();
-            List<Mensaje> listaMensajes = await context.Mensajes.Where(x => x.IdChat == idChat.Value).ToListAsync();
-
-            if (listaMensajes != null && listaMensajes.Count > 0)
+            PeticionDto<ChatDto> peticionDto = new PeticionDto<ChatDto>();
+            Chat chat = null;
+            try
             {
+                chat = context.Chats.Where(x => x.Usuarios.Any(y => y.Id == contacto.Value.IdUsuarioA) && x.Usuarios.Any(y => y.Id == contacto.Value.IdUsuarioB)).First();
+            }
+            catch { }
+            if(chat == null)
+            {
+                chat = new Chat();
+                Usuario usuarioA = context.Usuarios.Where(x => x.Id == contacto.Value.IdUsuarioA).First();
+                Usuario usuarioB = context.Usuarios.Where(x => x.Id == contacto.Value.IdUsuarioB).First();
+                chat.Usuarios.Add(usuarioA);
+                chat.Usuarios.Add(usuarioB);
+                context.Chats.Add(chat);
+                await context.SaveChangesAsync();
+            }
+            List<Mensaje> listaMensajes = new List<Mensaje>();
+            try
+            {
+                List<Mensaje> listaMensajesA = context.Mensajes.Where(x => x.Chat.Id == chat.Id && x.Usuario.Id == contacto.Value.IdUsuarioA).ToList();
+                listaMensajesA.ForEach(x => x.Usuario.Id = contacto.Value.IdUsuarioA);
+                List<Mensaje> listaMensajesB = context.Mensajes.Where(x => x.Chat.Id == chat.Id && x.Usuario.Id == contacto.Value.IdUsuarioB).ToList();
+                listaMensajesB.ForEach(x => x.Usuario.Id = contacto.Value.IdUsuarioB);
+                listaMensajes.AddRange(listaMensajesA);
+                listaMensajes.AddRange(listaMensajesB);
+                listaMensajes.ForEach(x => x.Chat = null);
+                listaMensajes = listaMensajes.OrderBy(x => x.Id).ToList();
+            }
+            catch { }
+
+            if (chat != null)
+            {
+                chat.Mensajes = listaMensajes;
                 peticionDto.PeticionCorrecta = true;
-                peticionDto.Value = mapper.Map<List<MensajeDto>>(listaMensajes);
+                chat.Usuarios = null;
+                peticionDto.Value = mapper.Map<ChatDto>(chat);
             }
             else
             {
                 peticionDto.PeticionCorrecta = false;
-                peticionDto.MensajeError = "El usuario no tiene contactos";
+                peticionDto.MensajeError = "Error al recuperar el chat";
             }
             return peticionDto;
         }
 
         [HttpPost("ObtenerUltimaSesion")]
-        public async Task<PeticionDto<SesionDto>> ObtenerUltimaSesion(PeticionDto<int> idSesion)
+        public async Task<PeticionDto<SesionDto>> ObtenerUltimaSesion(PeticionDto<int> idUsuario)
         {
             //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idSesion.TokenPeticion))
+            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
                 return new PeticionDto<SesionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
             PeticionDto<SesionDto> peticionDto = new PeticionDto<SesionDto>();
-            Sesion ultimaSesion = context.Sesiones.Where(x => x.Id == idSesion.Value).Last();
+            Sesion ultimaSesion = context.Sesiones.Where(x => x.IdUsuario == idUsuario.Value).Last();
 
             if (ultimaSesion != null)
             {
@@ -88,7 +122,7 @@ namespace GlobalChat.WebApi.Controllers
             else
             {
                 peticionDto.PeticionCorrecta = false;
-                peticionDto.MensajeError = "Ultima seseión desconocida";
+                peticionDto.MensajeError = "Ultima sesión desconocida";
             }
             return peticionDto;
 

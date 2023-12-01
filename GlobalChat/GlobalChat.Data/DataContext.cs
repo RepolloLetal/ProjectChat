@@ -32,12 +32,10 @@ namespace GlobalChat.Data
         // Agregar tablas
 
         public DbSet<Chat> Chats { get; set; }
-        public DbSet<Configuracion> Configuraciones { get; set; }
         public DbSet<Contacto> Contactos { get; set; }
         public DbSet<Mensaje> Mensajes { get; set; }
         public DbSet<Sesion> Sesiones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<UsuarioChat> Usuarioschats { get; set; }
 
     }
 }
