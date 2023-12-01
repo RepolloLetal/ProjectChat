@@ -162,7 +162,7 @@ namespace GlobalChat.WebApi.Controllers
                     nuevoCon.NombreUsuario = context.Usuarios.Where(x => x.Id == nuevoCon.IdOtroUsuario).First().Nombre;
                     try
                     {
-                        nuevoCon.UltSesion = context.Sesiones.Where(x => x.IdUsuario == nuevoCon.IdOtroUsuario).Last().DiaHoraSesion;
+                        nuevoCon.UltSesion = context.Sesiones.Where(x => x.IdUsuario == nuevoCon.IdOtroUsuario).OrderBy(x => x.Id).Last().DiaHoraSesion;
                     }
                     catch 
                     {
