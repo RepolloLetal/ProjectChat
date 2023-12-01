@@ -14,7 +14,7 @@ namespace GlobalChat.UI
     public static class ServicioAPI
     {
         public static HttpClient Cliente { get; private set; }
-        private static readonly string URLBASE = "https://localhost:7103/";
+        private static readonly string URLBASE = "https://pigeonchat.azurewebsites.net/";
 
         public static UsuarioDto Usuario { get; private set;}
         public static string TokenUsuario { get; private set;}
