@@ -58,6 +58,7 @@ namespace GlobalChat.WebApi.Controllers
             {
                 ultSesion.Usuario = context.Usuarios.Where(x => x.Id == ultSesion.IdUsuario).First();
                 context.Sesiones.Add(ultSesion);
+                await context.SaveChangesAsync();
             }
             catch { }
 
