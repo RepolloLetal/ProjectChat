@@ -179,5 +179,6 @@ public partial class Ajustes : ContentPage
     private void AcercaDe_Clicked(object sender, EventArgs e)
     {
         BorderAcercaDe.IsVisible = true;
+        TextoAcerca.Text = "CopyRight Nadia Calatrava Chabbak 2023 " +Environment.NewLine+ "Icons by Icons8";
     }
 }

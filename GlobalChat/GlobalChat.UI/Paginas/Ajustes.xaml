@@ -90,10 +90,10 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="120"/>
                  </Grid.RowDefinitions>
                 <Label Grid.Row="0" Text="Acerca de..." TextColor="#333333" FontSize="20" FontAttributes="Bold" Margin="15" WidthRequest="550"/>
-                <Label Grid.Row="1" Text="BLABLABLABLABLABLA" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="1" TextColor="#333333" FontFamily="Arial" FontSize="20" FontAttributes="Bold" Margin="15" HorizontalTextAlignment="Center" x:Name="TextoAcerca"/>
             </Grid>
         </Border>
     </Grid>
