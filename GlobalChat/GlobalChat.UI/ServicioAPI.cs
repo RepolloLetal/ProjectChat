@@ -47,6 +47,7 @@ namespace GlobalChat.UI
                     if (petUsu.PeticionCorrecta)
                     {
                         UsuarioLoggeado(petUsu);
+                        await EnviarUltimaSesion();
                     }
                     else
                     {
@@ -62,6 +63,15 @@ namespace GlobalChat.UI
             {
                 await navigation.PushModalAsync(new VentanaLogin());
             }
+        }
+
+        public async static Task EnviarUltimaSesion()
+        {
+            SesionDto sesion = new SesionDto { DiaHoraSesion = DateTime.Now.ToString("G"), IdUsuario = Usuario.Id };
+            PeticionDto<SesionDto> peticionSesion = new PeticionDto<SesionDto>();
+            peticionSesion.TokenPeticion = TokenUsuario;
+            peticionSesion.Value = sesion;
+            await Cliente.PostAsJsonAsync("api/Usuario/AgregarUltimaSesion", peticionSesion, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         }
     }
 }

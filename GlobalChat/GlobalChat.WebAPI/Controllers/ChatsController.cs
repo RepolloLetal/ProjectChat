@@ -103,31 +103,6 @@ namespace GlobalChat.WebApi.Controllers
             }
             return peticionDto;
         }
-
-        [HttpPost("ObtenerUltimaSesion")]
-        public async Task<PeticionDto<SesionDto>> ObtenerUltimaSesion(PeticionDto<int> idUsuario)
-        {
-            //Comprobacion usuario valido
-            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
-                return new PeticionDto<SesionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
-
-            PeticionDto<SesionDto> peticionDto = new PeticionDto<SesionDto>();
-            Sesion ultimaSesion = context.Sesiones.Where(x => x.IdUsuario == idUsuario.Value).Last();
-
-            if (ultimaSesion != null)
-            {
-                peticionDto.PeticionCorrecta = true;
-                peticionDto.Value = mapper.Map<SesionDto>(ultimaSesion);
-            }
-            else
-            {
-                peticionDto.PeticionCorrecta = false;
-                peticionDto.MensajeError = "Ultima sesión desconocida";
-            }
-            return peticionDto;
-
-        }
-
     }
 }
 

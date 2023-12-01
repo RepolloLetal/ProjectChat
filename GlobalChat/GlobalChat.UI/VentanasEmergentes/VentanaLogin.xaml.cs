@@ -56,6 +56,7 @@ public partial class VentanaLogin : ContentPage
                     Clave = petUsu.Value.Password
                 };
                 ServicioPersistencia.NuevaSesionIniciada(datosGuardado);
+                await ServicioAPI.EnviarUltimaSesion();
                 await Navigation.PopModalAsync();
             }
             else

@@ -45,6 +45,58 @@ namespace GlobalChat.WebApi.Controllers
             return peticionDto;
         }
 
+        [HttpPost("AgregarUltimaSesion")]
+        public async Task<PeticionDto<SesionDto>> AgregarUltimaSesion(PeticionDto<SesionDto> ultSesionPet)
+        {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(ultSesionPet.TokenPeticion))
+                return new PeticionDto<SesionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
+            PeticionDto<SesionDto> peticionDto = new PeticionDto<SesionDto>();
+            Sesion ultSesion = mapper.Map<Sesion>(ultSesionPet.Value);
+            try
+            {
+                ultSesion.Usuario = context.Usuarios.Where(x => x.Id == ultSesion.IdUsuario).First();
+                context.Sesiones.Add(ultSesion);
+            }
+            catch { }
+
+            if (ultSesion != null)
+            {
+                peticionDto.PeticionCorrecta = true;
+                peticionDto.Value = mapper.Map<SesionDto>(ultSesion);
+            }
+            else
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Ultima sesión desconocida";
+            }
+            return peticionDto;
+        }
+
+        [HttpPost("ObtenerUltimaSesion")]
+        public async Task<PeticionDto<SesionDto>> ObtenerUltimaSesion(PeticionDto<int> idUsuario)
+        {
+            //Comprobacion usuario valido
+            if (!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion))
+                return new PeticionDto<SesionDto>() { PeticionCorrecta = false, ErrorPorToken = true };
+
+            PeticionDto<SesionDto> peticionDto = new PeticionDto<SesionDto>();
+            Sesion ultimaSesion = context.Sesiones.Where(x => x.IdUsuario == idUsuario.Value).Last();
+
+            if (ultimaSesion != null)
+            {
+                peticionDto.PeticionCorrecta = true;
+                peticionDto.Value = mapper.Map<SesionDto>(ultimaSesion);
+            }
+            else
+            {
+                peticionDto.PeticionCorrecta = false;
+                peticionDto.MensajeError = "Ultima sesión desconocida";
+            }
+            return peticionDto;
+        }
+
         [HttpPost("RegistrarUsuario")]
         public async Task<PeticionDto<UsuarioDto>> RegistrarUsuario([FromBody]UsuarioDto nuevoUsuario) 
         {

@@ -157,6 +157,7 @@ public partial class Chats : ContentPage
                 chatActual.Mensajes.Add(nuevoMenPet.Value);
                 BurbujaChat BurMen = new BurbujaChat(nuevoMenPet.Value, nuevoMenPet.Value.Usuario.Id == ServicioAPI.Usuario.Id);
                 Mensajes.Add(BurMen);
+                await ServicioAPI.EnviarUltimaSesion();
             }
             else if (nuevoMenPet.ErrorPorToken)
             {
