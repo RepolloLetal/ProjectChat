@@ -2,13 +2,8 @@
 {
     public class ServicioAuth
     {
-        private Dictionary<int, string> UsuariosAuth { get; set; }
+        private static Dictionary<int, string> UsuariosAuth { get; set; } = new Dictionary<int, string>();
         public string Token { get; set; }
-
-        public ServicioAuth() 
-        {
-            UsuariosAuth =  new Dictionary<int, string>();
-        }
 
         public string UsuarioInicioSesion(int id)
         {
