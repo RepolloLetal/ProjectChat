@@ -4,6 +4,7 @@ using GlobalChat.Business.Dtos;
 using GlobalChat.Data.Entities;
 using AutoMapper;
 using GlobalChat.WebApi.Servicios;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlobalChat.WebApi.Controllers
 {
@@ -28,7 +29,12 @@ namespace GlobalChat.WebApi.Controllers
             if(!auth.ComprobarUsuarioValido(idUsuario.TokenPeticion)) 
                 return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true};
 
-            Usuario usuario = context.Usuarios.Where(x  => x.Id == idUsuario.Value).First();
+            Usuario usuario = null;
+            try
+            {
+                usuario = context.Usuarios.Where(x => x.Id == idUsuario.Value).First();
+            }
+            catch { }
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
 
             if (usuario != null) 
@@ -173,11 +179,28 @@ namespace GlobalChat.WebApi.Controllers
             if (!auth.ComprobarUsuarioValido(EliminaUsuario.TokenPeticion))
                 return new PeticionDto<UsuarioDto>() { PeticionCorrecta = false, ErrorPorToken = true };
 
-            Usuario usuario = context.Usuarios.Where(x => x.Id == EliminaUsuario.Value.Id).First();
+            Usuario usuario = null;
+            try
+            {
+                usuario = context.Usuarios.Where(x => x.Id == EliminaUsuario.Value.Id).First();
+            }
+            catch { }
             PeticionDto<UsuarioDto> peticionDto = new PeticionDto<UsuarioDto>();
 
             if (usuario !=null)
             {
+                List<Contacto> contactosBrr = await context.Contactos.Where(x => x.IdUsuarioA == usuario.Id || x.IdUsuarioB == usuario.Id).ToListAsync();
+                contactosBrr.ForEach(x => context.Contactos.Remove(x));
+                await context.SaveChangesAsync();
+                List<Mensaje> mensajesBrr = await context.Mensajes.Where(x => x.Usuario.Id == usuario.Id).ToListAsync();
+                mensajesBrr.ForEach(x => context.Mensajes.Remove(x));
+                await context.SaveChangesAsync();
+                List<Sesion> sesionesBrr = await context.Sesiones.Where(x => x.IdUsuario == usuario.Id).ToListAsync();
+                sesionesBrr.ForEach(x => context.Sesiones.Remove(x));
+                await context.SaveChangesAsync();
+                List<Chat> chatsBrr = await context.Chats.Where(x => x.Usuarios.Any(u => u.Id == usuario.Id)).ToListAsync();
+                chatsBrr.ForEach(x => context.Chats.Remove(x));
+                await context.SaveChangesAsync();
                 peticionDto.PeticionCorrecta = true;
                 context.Usuarios.Remove(usuario);
                 await context.SaveChangesAsync();

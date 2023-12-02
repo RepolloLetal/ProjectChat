@@ -148,6 +148,12 @@ public partial class Ajustes : ContentPage
         }
     }
 
+    private void CerrarSesion_Clicked(object sender, EventArgs e)
+    {
+        ServicioPersistencia.CerrarSesion();
+        ServicioAPI.CerrarSesion(Navigation);
+    }
+
     private async Task EliminarCuentaAsync()
     {
         PeticionDto<UsuarioDto> peticionEdi = new PeticionDto<UsuarioDto>() { TokenPeticion = ServicioAPI.TokenUsuario, Value = Usuario };
@@ -158,7 +164,8 @@ public partial class Ajustes : ContentPage
             PeticionDto<UsuarioDto> petUsu = JsonSerializer.Deserialize<PeticionDto<UsuarioDto>>(respuestaStr, new JsonSerializerOptions(JsonSerializerDefaults.Web)) ?? new PeticionDto<UsuarioDto>();
             if (petUsu.PeticionCorrecta)
             {
-                await Navigation.PushModalAsync(new VentanaLogin());
+                ServicioPersistencia.CerrarSesion();
+                ServicioAPI.CerrarSesion(Navigation);
             }
             else if (petUsu.ErrorPorToken)
             {

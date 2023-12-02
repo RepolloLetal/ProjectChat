@@ -49,6 +49,14 @@ namespace GlobalChat.UI
             }
         }
 
+        public static void CerrarSesion()
+        {
+            if (File.Exists(ARCHIVO))
+            {
+                File.Delete(ARCHIVO);
+            }
+        }
+
         public static void NuevaSesionIniciada(DatosGuardado datosGuardado)
         {
             ServicioPersistencia.datosGuardado = datosGuardado;

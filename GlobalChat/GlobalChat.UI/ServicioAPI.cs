@@ -73,5 +73,12 @@ namespace GlobalChat.UI
             peticionSesion.Value = sesion;
             await Cliente.PostAsJsonAsync("api/Usuario/AgregarUltimaSesion", peticionSesion, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         }
+
+        public async static Task CerrarSesion(INavigation navigation)
+        {
+            Usuario = new UsuarioDto();
+            TokenUsuario = string.Empty;
+            await navigation.PushModalAsync(new VentanaLogin());
+        }
     }
 }

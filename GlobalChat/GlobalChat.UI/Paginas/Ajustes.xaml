@@ -52,8 +52,9 @@
             </Grid>
         </Border>
         <Button Grid.Row="2" BackgroundColor="#94869F" Text="Cambiar contraseña" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="MostrarEditarContra_Clicked"/>
-        <Button Grid.Row="3" BackgroundColor="#94869F" Text="Eliminar cuenta" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="EliminarCuenta_Clicked"/>
-        <Button Grid.Row="4" BackgroundColor="#94869F" Text="Acerca de" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="AcercaDe_Clicked"/>
+        <Button Grid.Row="3" BackgroundColor="#94869F" Text="Cerrar Sesion" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="CerrarSesion_Clicked"/>
+        <Button Grid.Row="4" BackgroundColor="#94869F" Text="Eliminar cuenta" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="EliminarCuenta_Clicked"/>
+        <Button Grid.Row="5" BackgroundColor="#94869F" Text="Acerca de" FontAttributes="Bold" TextColor="#333333" FontSize="25" HeightRequest="60" WidthRequest="330" HorizontalOptions="Start" Margin="20,0,0,0" Clicked="AcercaDe_Clicked"/>
 
         <Border Grid.Column="1" BackgroundColor="#E1D9E9" Margin="20" HorizontalOptions="End" IsVisible="false" x:Name="BorderContra">
             <Border.StrokeShape>
