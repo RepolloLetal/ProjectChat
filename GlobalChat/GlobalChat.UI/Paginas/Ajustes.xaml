@@ -76,7 +76,7 @@
                 <Label Grid.Row="1" Text="Introduzca contraseña antigua" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5"/>
                 <Entry Grid.Row="2" PlaceholderColor="LightGrey" BackgroundColor="#94869F" IsPassword="True" x:Name="passVieja"/>
                 <Label Grid.Row="3" Text="Introduzca contraseña nueva" TextColor="#333333" FontSize="17" FontAttributes="Bold" Margin="5"/>
-                <Entry Grid.Row="4" PlaceholderColor="LightGrey" BackgroundColor="#94869F" IsPassword="True"/>
+                <Entry Grid.Row="4" PlaceholderColor="LightGrey" BackgroundColor="#94869F" IsPassword="True" x:Name="passNueva"/>
                 <Button Grid.Row="5" Text="Confirmar cambios" HorizontalOptions="End" TextColor="#333333" FontAttributes="Bold" FontSize="18" Clicked="EditarContra_Clicked"/>
             </Grid>
         </Border>

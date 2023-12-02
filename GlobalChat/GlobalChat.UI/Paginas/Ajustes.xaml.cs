@@ -103,6 +103,8 @@ public partial class Ajustes : ContentPage
 
     private async Task ActualizarContraAsync()
     {
+        CargarDatos();
+        Usuario.Password = passNueva.Text;
         PeticionDto<UsuarioDto> peticionEdi = new PeticionDto<UsuarioDto>() { TokenPeticion = ServicioAPI.TokenUsuario, Value = Usuario };
         HttpResponseMessage respuesta = await ServicioAPI.Cliente.PostAsJsonAsync("api/Usuario/EditarUsuario", peticionEdi, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         if (respuesta.IsSuccessStatusCode)
