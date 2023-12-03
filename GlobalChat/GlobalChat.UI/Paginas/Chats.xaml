@@ -31,10 +31,11 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             
-            <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" BackgroundColor="#9E87B0">
+            <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="10" BackgroundColor="#9E87B0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="35"/>
                 </Border.StrokeShape>
@@ -42,11 +43,11 @@
                     <StackLayout x:Name="Mensajes" Margin="5"/>
                 </ScrollView>
             </Border>
-            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="#9E87B0" Margin="5">
+            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" BackgroundColor="#9E87B0" Margin="5">
                 <Image Source="usuario.png"/>
                 <Label Text="" TextColor="White" FontAttributes="Bold" Margin="20" FontSize="22" TranslationX="10" x:Name="NombreContacto" HeightRequest="50" TranslationY="10"/>
             </StackLayout>
-            <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black" Margin="10" x:Name="textInput" />
+            <Editor Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="#E8DFEB" IsTextPredictionEnabled="True" FontFamily="Arial" FontSize="17" TextColor="Black" Margin="10" x:Name="textInput" />
             <ImageButton Source="emoticono.png" Grid.Row="2" Grid.Column="3" HorizontalOptions="End" Margin="20" HeightRequest="30" WidthRequest="30" Clicked="Emoticon_Clicked"/>
             <Ellipse Grid.Row="2" BackgroundColor="#00FFB3" Grid.Column="4" WidthRequest="80" HeightRequest="80"/>
             <ImageButton Source="send.png" Grid.Row="2" BackgroundColor="Transparent" Grid.Column="4" WidthRequest="50" HeightRequest="50" Clicked="EnvMensaje_Clicked"/>
